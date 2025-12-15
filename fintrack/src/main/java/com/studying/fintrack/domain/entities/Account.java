@@ -29,8 +29,7 @@ public class Account {
   public Account() {
   }
 
-  public Account(int id, String name, String currency, User user) {
-    this.id = id;
+  public Account(String name, String currency, User user) {
     this.name = name;
     this.currency = currency;
     this.user = user;

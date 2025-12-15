@@ -37,9 +37,8 @@ public class Transaction {
   public Transaction() {
   }
 
-  public Transaction(int id, Timestamp bookedAt, double amountDecimal, String currency,
+  public Transaction(Timestamp bookedAt, double amountDecimal, String currency,
       String rawDescription, Account account) {
-    this.id = id;
     this.bookedAt = bookedAt;
     this.amountDecimal = amountDecimal;
     this.currency = currency;

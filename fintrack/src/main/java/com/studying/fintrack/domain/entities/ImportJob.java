@@ -31,9 +31,8 @@ public class ImportJob {
   public ImportJob() {
   }
 
-  public ImportJob(int id, String status, Timestamp createdAt, Timestamp finishedAt,
+  public ImportJob(String status, Timestamp createdAt, Timestamp finishedAt,
       Map<String, Object> statsJson) {
-    this.id = id;
     this.status = status;
     this.createdAt = createdAt;
     this.finishedAt = finishedAt;

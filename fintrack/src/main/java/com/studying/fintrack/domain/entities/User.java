@@ -35,8 +35,7 @@ public class User implements UserDetails {
   public User() {
   }
 
-  public User(int id, String email, String username, String password, Timestamp createdAt) {
-    this.id = id;
+  public User(String email, String username, String password, Timestamp createdAt) {
     this.email = email;
     this.password = password;
     this.createdAt = createdAt;

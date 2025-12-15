@@ -1,0 +1,156 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Volodymyr Melnyk
+      changes:
+        - createTable:
+            tableName: accounts
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_accounts
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: currency
+                  type: CHAR(3)
+                  constraints:
+                    unique: false
+                    nullable: false
+        - sql:
+            sql: >
+              CREATE TYPE category_type AS ENUM ('INCOME', 'EXPENSE');
+        - createTable:
+            tableName: categories
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_categories
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: type
+                  type: category_type
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: transactions
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_transactions
+                    nullable: false
+              - column:
+                  name: account_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_account_id
+                    referencedTableName: accounts
+                    referencedColumnNames: id
+              - column:
+                  name: booked_at
+                  type: TIMESTAMPTZ
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount_decimal
+                  type: NUMERIC(19,2)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: currency
+                  type: CHAR(3)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: raw_description
+                  type: VARCHAR(1024)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: category_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_category_id
+                    referencedTableName: categories
+                    referencedColumnNames: id
+                    nullable: true
+              - column:
+                  name: note
+                  type: VARCHAR(1024)
+                  constraints:
+                    unique: false
+                    nullable: true
+        - createTable:
+            tableName: import_jobs
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(40)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMPTZ
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: finished_at
+                  type: TIMESTAMPTZ
+                  constraints:
+                    nullable: true
+              - column:
+                  name: stats_json
+                  type: JSONB
+                  constraints:
+                    unique: false
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: transactions
+            cascadeConstraints: true
+        - dropTable:
+            tableName: categories
+            cascadeConstraints: true
+        - dropTable:
+            tableName: accounts
+            cascadeConstraints: true
+        - dropTable:
+            tableName: import_jobs
+            cascadeConstraints: true
+        - sql:
+            sql: DROP TYPE IF EXISTS category_type;

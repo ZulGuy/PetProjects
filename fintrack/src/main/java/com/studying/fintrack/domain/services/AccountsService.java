@@ -18,4 +18,20 @@ public class AccountsService {
     account.setCurrency(dto.getCurrency());
     return accountsRepository.save(account);
   }
+
+  public Account getAccountById(Integer id) {
+    return accountsRepository.findById(id).orElse(null);
+  }
+
+  public Account updateAccount(Account account) {
+    return accountsRepository.save(account);
+  }
+
+  public void deleteAccount(Account account) {
+    accountsRepository.delete(account);
+  }
+
+  public Iterable<Account> getAllAccounts() {
+    return accountsRepository.findAll();
+  }
 }

@@ -29,8 +29,7 @@ public class Category {
   public Category() {
   }
 
-  public Category(int id, String name, Type type, User user) {
-    this.id = id;
+  public Category(String name, Type type, User user) {
     this.name = name;
     this.type = type;
     this.user = user;

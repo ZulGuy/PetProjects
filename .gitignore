@@ -1,0 +1,17 @@
+# Application properties
+*.properties
+
+# IntelliJ
+.idea/
+*.iml
+
+# Maven/Gradle build
+target/
+build/
+
+# Resources
+resources/
+
+# Config
+*.xml
+*.yml

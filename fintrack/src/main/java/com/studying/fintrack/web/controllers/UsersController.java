@@ -29,16 +29,13 @@ public class UsersController {
 
   @PostMapping
   public User register(@RequestBody UserDTO dto) {
-    User user = new User();
-    user.setEmail(dto.getEmail());
-    user.setPassword(dto.getPasswordHash());
-    user.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+    User user = new User(dto.getUsername(), dto.getPasswordHash(), Timestamp.valueOf(LocalDateTime.now()));
     return usersRepository.save(user);
   }
 
-  @GetMapping("/{email}")
-  public User getUserByEmail(@RequestParam String email) {
-    return usersRepository.findByEmail(email);
+  @GetMapping("/{username}")
+  public User getUserByUsername(@RequestParam String username) {
+    return usersRepository.findByUsername(username);
   }
 
   @GetMapping("/get-by-creation-date")
@@ -46,9 +43,9 @@ public class UsersController {
     return usersRepository.findByCreatedAtBetween(from, to);
   }
 
-  @GetMapping("/{email}")
-  public boolean isUserExists(@RequestParam String email) {
-    return usersRepository.findByEmail(email) != null;
+  @GetMapping("/{username}")
+  public boolean isUserExists(@RequestParam String username) {
+    return usersRepository.findByUsername(username) != null;
   }
 
   @PutMapping

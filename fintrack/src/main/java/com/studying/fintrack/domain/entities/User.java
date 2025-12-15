@@ -21,8 +21,6 @@ public class User implements UserDetails {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id", nullable = false)
   private int id;
-  @Column(name = "email", nullable = false)
-  private String email;
   @Column(name = "username", nullable = false)
   private String username;
   @Column(name = "password", nullable = false)
@@ -35,8 +33,7 @@ public class User implements UserDetails {
   public User() {
   }
 
-  public User(String email, String username, String password, Timestamp createdAt) {
-    this.email = email;
+  public User(String username, String password, Timestamp createdAt) {
     this.password = password;
     this.createdAt = createdAt;
     this.username = username;
@@ -49,14 +46,6 @@ public class User implements UserDetails {
 
   public void setId(int id) {
     this.id = id;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
   }
 
   @Override

@@ -2,9 +2,8 @@ package com.studying.fintrack.web.controllers;
 
 import com.studying.fintrack.domain.entities.User;
 import com.studying.fintrack.domain.models.UserDTO;
-import com.studying.fintrack.domain.repositories.UsersRepository;
+import com.studying.fintrack.domain.services.UsersService;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,45 +16,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UsersController {
 
-  UsersRepository usersRepository;
+  UsersService usersService;
 
   @Autowired
-  public UsersController(UsersRepository usersRepository) {
-    this.usersRepository = usersRepository;
+  public UsersController(UsersService usersService) {
+    this.usersService = usersService;
   }
 
   @PostMapping
   public User register(@RequestBody UserDTO dto) {
-    User user = new User(dto.getUsername(), dto.getPasswordHash(), Timestamp.valueOf(LocalDateTime.now()));
-    return usersRepository.save(user);
+    return usersService.create(dto);
   }
 
   @GetMapping("/{username}")
   public User getUserByUsername(@RequestParam String username) {
-    return usersRepository.findByUsername(username);
+    return usersService.getUserByUsername(username);
   }
 
   @GetMapping("/get-by-creation-date")
   public List<User> getUsersByCreationDate(@RequestParam Timestamp from, @RequestParam Timestamp to) {
-    return usersRepository.findByCreatedAtBetween(from, to);
+    return usersService.getUsersByCreatedAtBetween(from, to);
   }
 
   @GetMapping("/{username}")
   public boolean isUserExists(@RequestParam String username) {
-    return usersRepository.findByUsername(username) != null;
+    return usersService.isUserExists(username);
   }
 
-  @PutMapping
-  public User updateUser(@RequestBody User user) {
-    return usersRepository.save(user);
+  @PutMapping("/{id}")
+  public User updateUser(@RequestBody UserDTO dto) {
+    return usersService.update(dto);
   }
 
-  @DeleteMapping
-  public void deleteUser(@RequestBody User user) {
-    usersRepository.delete(user);
+  @DeleteMapping("/{id}")
+  public void deleteUser(@RequestParam int id) {
+    usersService.delete(id);
   }
 
 }

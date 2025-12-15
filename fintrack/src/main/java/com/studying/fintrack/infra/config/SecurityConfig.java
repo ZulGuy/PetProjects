@@ -1,9 +1,10 @@
 package com.studying.fintrack.infra.config;
 
-import com.studying.fintrack.domain.services.UsersService;
+import com.studying.fintrack.domain.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -25,11 +26,11 @@ import org.springframework.security.web.authentication.password.HaveIBeenPwnedRe
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-  private UsersService usersService;
+  private UserDetailsServiceImpl userDetailsServiceImpl;
 
   @Autowired
-  public SecurityConfig(UsersService usersService) {
-    this.usersService = usersService;
+  public SecurityConfig(UserDetailsServiceImpl userDetailsServiceImpl) {
+    this.userDetailsServiceImpl = userDetailsServiceImpl;
   }
 
   @Bean
@@ -39,7 +40,8 @@ public class SecurityConfig {
   }
   @Bean
   public AuthenticationProvider authenticationProvider() {
-    DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider(usersService);
+    DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider(
+        userDetailsServiceImpl);
     daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
     return daoAuthenticationProvider;
   }
@@ -63,6 +65,7 @@ public class SecurityConfig {
         )
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
             .anyRequest().authenticated()
         )
         .build();

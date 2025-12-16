@@ -20,6 +20,7 @@ public class UsersService {
   }
 
   public User create(UserDTO dto) {
+
     User user = new User(dto.getUsername(), dto.getPasswordHash(), Timestamp.valueOf(LocalDateTime.now()));
     return usersRepository.save(user);
   }

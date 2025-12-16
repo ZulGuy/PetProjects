@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.sql.Timestamp;
 import java.util.Map;
@@ -27,16 +29,20 @@ public class ImportJob {
   @Convert(converter = JsonbConvertor.class)
   @Column(name = "stats_json", columnDefinition = "jsonb")
   private Map<String, Object> statsJson;
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  private User user;
 
   public ImportJob() {
   }
 
   public ImportJob(String status, Timestamp createdAt, Timestamp finishedAt,
-      Map<String, Object> statsJson) {
+      Map<String, Object> statsJson, User user) {
     this.status = status;
     this.createdAt = createdAt;
     this.finishedAt = finishedAt;
     this.statsJson = statsJson;
+    this.user = user;
   }
 
   public int getId() {
@@ -77,5 +83,13 @@ public class ImportJob {
 
   public void setStatsJson(Map<String, Object> statsJson) {
     this.statsJson = statsJson;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 }

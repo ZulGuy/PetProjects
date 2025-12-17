@@ -6,6 +6,7 @@ import com.studying.fintrack.domain.services.TransactionsService;
 import com.studying.fintrack.domain.specifications.TransactionSpecification;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
@@ -26,25 +27,31 @@ public class TransactionsController {
   TransactionsRepository transactionsRepository;
 
   @Autowired
-  public TransactionsController(TransactionsService transactionsService, TransactionsRepository transactionsRepository) {
+  public TransactionsController(TransactionsService transactionsService,
+      TransactionsRepository transactionsRepository) {
     this.transactionsService = transactionsService;
     this.transactionsRepository = transactionsRepository;
   }
 
   @GetMapping
   public ResponseEntity<List<Transaction>> getTransactions() {
-    return transactionsService.getAllTransactions().isEmpty() ? ResponseEntity.noContent().build()
+    return transactionsService.getAllTransactions().isEmpty()
+        || transactionsService.getAllTransactions() == null ? ResponseEntity.noContent().build()
         : ResponseEntity.ok(transactionsService.getAllTransactions());
   }
 
   @GetMapping("{id}")
-  public Transaction getTransactionById(@PathVariable int id) {
-    return transactionsService.getTransactionById(id);
+  public ResponseEntity<Transaction> getTransactionById(@PathVariable int id) {
+    return transactionsService.getTransactionById(id) == null ? ResponseEntity.notFound().build()
+        : ResponseEntity.ok(transactionsService.getTransactionById(id));
   }
 
   @GetMapping("/get-by-user")
-  public List<Transaction> getTransactionsByUserId(@RequestParam int userId) {
-    return transactionsService.getTransactionsByUserId(userId);
+  public ResponseEntity<List<Transaction>> getTransactionsByUserId(@RequestParam int userId) {
+    return transactionsService.getTransactionsByUserId(userId) == null
+        || transactionsService.getTransactionsByUserId(userId).isEmpty()
+        ? ResponseEntity.noContent().build()
+        : ResponseEntity.ok(transactionsService.getTransactionsByUserId(userId));
   }
 
   @GetMapping("/get-by-date")
@@ -53,18 +60,27 @@ public class TransactionsController {
   }
 
   @GetMapping("/get-by-date-range")
-  public List<Transaction> getTransactionsByDateRange(@RequestParam String from, @RequestParam String to) {
+  public List<Transaction> getTransactionsByDateRange(@RequestParam String from,
+      @RequestParam String to) {
     return null;
   }
 
   @GetMapping("/get-by-category")
-  public List<Transaction> getTransactionsByCategoryId(@RequestParam int categoryId) {
-    return transactionsService.getTransactionsByCategoryId(categoryId);
+  public ResponseEntity<List<Transaction>> getTransactionsByCategoryId(
+      @RequestParam int categoryId) {
+    return transactionsService.getTransactionsByCategoryId(categoryId).isEmpty()
+        || transactionsService.getTransactionsByCategoryId(categoryId) == null
+        ? ResponseEntity.noContent().build()
+        : ResponseEntity.ok(transactionsService.getTransactionsByCategoryId(categoryId));
   }
 
   @PostMapping
   public Transaction createTransaction(Transaction transaction) {
-    return transactionsService.createTransaction(transaction);
+    Transaction newTransaction = transactionsService.createTransaction(transaction);
+    if(transactionsService.getTransactionById(newTransaction.getId()) != null) {
+      return newTransaction;
+    }
+    return null;
   }
 
   @PutMapping("{id}")
@@ -89,12 +105,25 @@ public class TransactionsController {
   ) {
     Specification<Transaction> spec = Specification.unrestricted();
 
-    if (categoryId != null) spec = spec.and(TransactionSpecification.byCategoryId(categoryId));
-    if (bookedAt != null) spec = spec.and(TransactionSpecification.byDate(Timestamp.valueOf(bookedAt)));
-    if (userId != null) spec = spec.and(TransactionSpecification.byUserId(userId));
-    if (categories != null && !categories.isEmpty()) spec = spec.and(TransactionSpecification.byCategories(categories));
-    if (from != null && to != null) spec = spec.and(TransactionSpecification.betweenDates(Timestamp.valueOf(from), Timestamp.valueOf(to)));
+    if (categoryId != null) {
+      spec = spec.and(TransactionSpecification.byCategoryId(categoryId));
+    }
+    if (bookedAt != null) {
+      spec = spec.and(TransactionSpecification.byDate(Timestamp.valueOf(bookedAt)));
+    }
+    if (userId != null) {
+      spec = spec.and(TransactionSpecification.byUserId(userId));
+    }
+    if (categories != null && !categories.isEmpty()) {
+      spec = spec.and(TransactionSpecification.byCategories(categories));
+    }
+    if (from != null && to != null) {
+      spec = spec.and(
+          TransactionSpecification.betweenDates(Timestamp.valueOf(from), Timestamp.valueOf(to)));
+    }
     var transactions = transactionsRepository.findAll();
+    if (transactions.stream().toList().isEmpty())
+      throw new RuntimeException("No transactions found");
     return transactions.stream().toList();
   }
 

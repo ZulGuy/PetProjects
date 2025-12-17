@@ -1,8 +1,13 @@
 package com.studying.fintrack.web.controllers;
 
 import com.studying.fintrack.domain.entities.Transaction;
+import com.studying.fintrack.domain.repositories.TransactionsRepository;
 import com.studying.fintrack.domain.services.TransactionsService;
+import com.studying.fintrack.domain.specifications.TransactionSpecification;
+import java.sql.Timestamp;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class TransactionsController {
 
   TransactionsService transactionsService;
+  TransactionsRepository transactionsRepository;
 
-  public TransactionsController(TransactionsService transactionsService) {
+  @Autowired
+  public TransactionsController(TransactionsService transactionsService, TransactionsRepository transactionsRepository) {
     this.transactionsService = transactionsService;
+    this.transactionsRepository = transactionsRepository;
   }
 
   @GetMapping
@@ -68,6 +76,26 @@ public class TransactionsController {
   @DeleteMapping("{id}")
   public void deleteTransaction(@PathVariable int id) {
     transactionsService.deleteTransaction(id);
+  }
+
+  @GetMapping("/search")
+  public List<Transaction> searchTransactions(
+      @RequestParam(required = false) Integer categoryId,
+      @RequestParam(required = false) String bookedAt,
+      @RequestParam(required = false) Integer userId,
+      @RequestParam(required = false) String from,
+      @RequestParam(required = false) String to,
+      @RequestParam(required = false) List<Integer> categories
+  ) {
+    Specification<Transaction> spec = Specification.unrestricted();
+
+    if (categoryId != null) spec = spec.and(TransactionSpecification.byCategoryId(categoryId));
+    if (bookedAt != null) spec = spec.and(TransactionSpecification.byDate(Timestamp.valueOf(bookedAt)));
+    if (userId != null) spec = spec.and(TransactionSpecification.byUserId(userId));
+    if (categories != null && !categories.isEmpty()) spec = spec.and(TransactionSpecification.byCategories(categories));
+    if (from != null && to != null) spec = spec.and(TransactionSpecification.betweenDates(Timestamp.valueOf(from), Timestamp.valueOf(to)));
+    var transactions = transactionsRepository.findAll();
+    return transactions.stream().toList();
   }
 
 }

@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import org.springframework.data.jpa.domain.Specification;
 
+//Додати перевірку на isEmpty та null до усіх методів
 public class TransactionSpecification {
 
   public static Specification<Transaction> byDate(Timestamp booked_at) {

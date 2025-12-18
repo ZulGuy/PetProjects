@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountsService {
 
-  @Autowired
   private AccountsRepository accountsRepository;
+
+  @Autowired
+  public AccountsService(AccountsRepository accountsRepository) {
+    this.accountsRepository = accountsRepository;
+  }
 
   public Account createAccount(AccountDTO dto) {
     Account account = new Account();
@@ -20,7 +24,11 @@ public class AccountsService {
   }
 
   public Account getAccountById(Integer id) {
-    return accountsRepository.findById(id).orElse(null);
+    Account account = accountsRepository.findById(id).orElse(null);
+    if (account == null) {
+      throw new NullPointerException("Account not found in DB!");
+    }
+    return account;
   }
 
   public Account updateAccount(Account account) {

@@ -6,7 +6,6 @@ import com.studying.fintrack.domain.services.TransactionsService;
 import com.studying.fintrack.domain.specifications.TransactionSpecification;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;

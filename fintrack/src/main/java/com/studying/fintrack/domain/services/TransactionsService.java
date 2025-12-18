@@ -4,6 +4,7 @@ import com.studying.fintrack.domain.entities.Transaction;
 import com.studying.fintrack.domain.repositories.TransactionsRepository;
 import java.sql.Timestamp;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,6 +12,7 @@ public class TransactionsService {
 
   TransactionsRepository transactionsRepository;
 
+  @Autowired
   public TransactionsService(TransactionsRepository transactionsRepository) {
     this.transactionsRepository = transactionsRepository;
   }
@@ -20,7 +22,11 @@ public class TransactionsService {
   }
 
   public Transaction getTransactionById(int id) {
-    return transactionsRepository.findById(id).orElse(null);
+    Transaction transaction = transactionsRepository.findById(id).orElse(null);
+    if (transaction == null) {
+      throw new NullPointerException("Transaction not found in DB!");
+    }
+    return transaction;
   }
 
   public Transaction createTransaction(Transaction transaction) {

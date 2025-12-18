@@ -28,7 +28,7 @@ public class Transaction {
   @Column(name = "note", nullable = true)
   private String note;
   @ManyToOne
-  @JoinColumn(name = "user_id", nullable = false)
+  @JoinColumn(name = "account_id", nullable = false)
   private Account account;
   @ManyToOne
   @JoinColumn(name = "category_id", nullable = false)

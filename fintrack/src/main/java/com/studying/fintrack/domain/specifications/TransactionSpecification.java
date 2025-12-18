@@ -18,9 +18,9 @@ public class TransactionSpecification {
         criteriaBuilder.between(root.get("booked_at"), from, to);
   }
 
-  public static Specification<Transaction> byUserId(int userId) {
+  public static Specification<Transaction> byAccountId(int accountId) {
     return (root, query, criteriaBuilder) ->
-        criteriaBuilder.equal(root.get("user_id"), userId);
+        criteriaBuilder.equal(root.get("account_id"), accountId);
   }
 
   public static Specification<Transaction> byCategoryId(int categoryId) {

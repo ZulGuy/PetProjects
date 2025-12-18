@@ -46,11 +46,11 @@ public class TransactionsController {
   }
 
   @GetMapping("/get-by-user")
-  public ResponseEntity<List<Transaction>> getTransactionsByUserId(@RequestParam int userId) {
-    return transactionsService.getTransactionsByUserId(userId) == null
-        || transactionsService.getTransactionsByUserId(userId).isEmpty()
+  public ResponseEntity<List<Transaction>> getTransactionsByAccountId(@RequestParam int userId) {
+    return transactionsService.getTransactionsByAccountId(userId) == null
+        || transactionsService.getTransactionsByAccountId(userId).isEmpty()
         ? ResponseEntity.noContent().build()
-        : ResponseEntity.ok(transactionsService.getTransactionsByUserId(userId));
+        : ResponseEntity.ok(transactionsService.getTransactionsByAccountId(userId));
   }
 
   @GetMapping("/get-by-date")
@@ -97,7 +97,7 @@ public class TransactionsController {
   public List<Transaction> searchTransactions(
       @RequestParam(required = false) Integer categoryId,
       @RequestParam(required = false) String bookedAt,
-      @RequestParam(required = false) Integer userId,
+      @RequestParam(required = false) Integer accountId,
       @RequestParam(required = false) String from,
       @RequestParam(required = false) String to,
       @RequestParam(required = false) List<Integer> categories
@@ -110,8 +110,8 @@ public class TransactionsController {
     if (bookedAt != null) {
       spec = spec.and(TransactionSpecification.byDate(Timestamp.valueOf(bookedAt)));
     }
-    if (userId != null) {
-      spec = spec.and(TransactionSpecification.byUserId(userId));
+    if (accountId != null) {
+      spec = spec.and(TransactionSpecification.byAccountId(accountId));
     }
     if (categories != null && !categories.isEmpty()) {
       spec = spec.and(TransactionSpecification.byCategories(categories));

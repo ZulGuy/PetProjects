@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsersRepository extends JpaRepository<User, Integer> {
-  User findByEmail(String email);
   User findByUsername(String username);
   List<User> findByCreatedAtBetween(Timestamp from, Timestamp to);
 }

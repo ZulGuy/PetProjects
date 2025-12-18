@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TransactionsRepository extends JpaRepository<Transaction, Integer> {
 
-  List<Transaction> findByUserId(int userId);
+  List<Transaction> findByAccountId(int accountId);
   List<Transaction> findByBookedAtBetween(Timestamp from, Timestamp to);
   List<Transaction> findByBookedAt(Timestamp bookedAt);
   List<Transaction> findByCategoryId(int categoryId);

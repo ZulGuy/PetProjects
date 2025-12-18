@@ -41,8 +41,8 @@ public class TransactionsService {
     return transactionsRepository.save(transaction);
   }
 
-  public List<Transaction> getTransactionsByUserId(int userId) {
-    return transactionsRepository.findByUserId(userId);
+  public List<Transaction> getTransactionsByAccountId(int accountId) {
+    return transactionsRepository.findByAccountId(accountId);
   }
 
   public List<Transaction> getTransactionsByDate(Timestamp bookedAt) {

@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ public class UsersController {
   }
 
   @GetMapping("/{username}")
-  public User getUserByUsername(@RequestParam String username) {
+  public User getUserByUsername(@PathVariable String username) {
     return usersService.getUserByUsername(username);
   }
 
@@ -41,18 +42,13 @@ public class UsersController {
     return usersService.getUsersByCreatedAtBetween(from, to);
   }
 
-  @GetMapping("/{username}")
-  public boolean isUserExists(@RequestParam String username) {
-    return usersService.isUserExists(username);
-  }
-
   @PutMapping("/{id}")
   public User updateUser(@RequestBody UserDTO dto) {
     return usersService.update(dto);
   }
 
   @DeleteMapping("/{id}")
-  public void deleteUser(@RequestParam int id) {
+  public void deleteUser(@PathVariable int id) {
     usersService.delete(id);
   }
 

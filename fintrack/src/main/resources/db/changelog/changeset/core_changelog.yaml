@@ -15,7 +15,7 @@ databaseChangeLog:
                     primaryKeyName: pk_users
                     nullable: false
               - column:
-                  name: email
+                  name: username
                   type: VARCHAR(320)
                   constraints:
                     nullable: false

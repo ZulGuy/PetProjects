@@ -2,7 +2,7 @@ package com.studying.fintrack.domain.models;
 
 public class UserDTO {
   private String username;
-  private String passwordHash;
+  private String password;
 
   public String getUsername() {
     return username;
@@ -12,7 +12,11 @@ public class UserDTO {
     this.username = username;
   }
 
-  public String getPasswordHash() {
-    return passwordHash;
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 }

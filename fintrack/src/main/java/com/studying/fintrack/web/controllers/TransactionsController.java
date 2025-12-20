@@ -4,6 +4,7 @@ import com.studying.fintrack.domain.entities.Transaction;
 import com.studying.fintrack.domain.repositories.TransactionsRepository;
 import com.studying.fintrack.domain.services.TransactionsService;
 import com.studying.fintrack.domain.specifications.TransactionSpecification;
+import jakarta.persistence.EntityNotFoundException;
 import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class TransactionsController {
         : ResponseEntity.ok(transactionsService.getAllTransactions());
   }
 
-  @GetMapping("{id}")
+  @GetMapping("/{id}")
   public ResponseEntity<Transaction> getTransactionById(@PathVariable int id) {
     return transactionsService.getTransactionById(id) == null ? ResponseEntity.notFound().build()
         : ResponseEntity.ok(transactionsService.getTransactionById(id));
@@ -82,13 +83,13 @@ public class TransactionsController {
     return null;
   }
 
-  @PutMapping("{id}")
+  @PutMapping("/{id}")
   public Transaction updateTransaction(@PathVariable int id, Transaction transaction) {
     transaction.setId(id);
     return transactionsService.updateTransaction(transaction);
   }
 
-  @DeleteMapping("{id}")
+  @DeleteMapping("/{id}")
   public void deleteTransaction(@PathVariable int id) {
     transactionsService.deleteTransaction(id);
   }
@@ -120,9 +121,9 @@ public class TransactionsController {
       spec = spec.and(
           TransactionSpecification.betweenDates(Timestamp.valueOf(from), Timestamp.valueOf(to)));
     }
-    var transactions = transactionsRepository.findAll();
+    var transactions = transactionsRepository.findAll(spec);
     if (transactions.stream().toList().isEmpty())
-      throw new RuntimeException("No transactions found");
+      throw new EntityNotFoundException("No transactions found");
     return transactions.stream().toList();
   }
 

@@ -2,6 +2,7 @@ package com.studying.fintrack.domain.services;
 
 import com.studying.fintrack.domain.entities.Category;
 import com.studying.fintrack.domain.repositories.CategoriesRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class CategoriesService {
     this.categoriesRepository = categoriesRepository;
   }
 
-  public Iterable<Category> getAllCategories() {
+  public List<Category> getAllCategories() {
     return categoriesRepository.findAll();
   }
 

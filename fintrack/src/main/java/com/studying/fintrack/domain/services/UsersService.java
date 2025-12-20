@@ -3,6 +3,7 @@ package com.studying.fintrack.domain.services;
 import com.studying.fintrack.domain.entities.User;
 import com.studying.fintrack.domain.models.UserDTO;
 import com.studying.fintrack.domain.repositories.UsersRepository;
+import jakarta.persistence.EntityNotFoundException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,7 +22,7 @@ public class UsersService {
 
   public User create(UserDTO dto) {
 
-    User user = new User(dto.getUsername(), dto.getPasswordHash(), Timestamp.valueOf(LocalDateTime.now()));
+    User user = new User(dto.getUsername(), dto.getPassword(), Timestamp.valueOf(LocalDateTime.now()));
     return usersRepository.save(user);
   }
 
@@ -33,7 +34,7 @@ public class UsersService {
     return usersRepository.findByUsername(username);
   }
 
-  public Iterable<User> getAllUsers() {
+  public List<User> getAllUsers() {
     return usersRepository.findAll();
   }
 
@@ -45,8 +46,10 @@ public class UsersService {
     return usersRepository.findByCreatedAtBetween(from, to);
   }
 
-  public User update(UserDTO dto) {
-    User updatedUser = usersRepository.findByUsername(dto.getUsername());
+  public User update(int id, UserDTO dto) {
+    User updatedUser = usersRepository.findById(id).orElse(null);
+    if (updatedUser == null)
+      throw new EntityNotFoundException("User not found in DB!");
     return usersRepository.save(updatedUser);
   }
 

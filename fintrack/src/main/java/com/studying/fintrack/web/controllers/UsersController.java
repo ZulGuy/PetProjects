@@ -43,8 +43,8 @@ public class UsersController {
   }
 
   @PutMapping("/{id}")
-  public User updateUser(@RequestBody UserDTO dto) {
-    return usersService.update(dto);
+  public User updateUser(@PathVariable int id, @RequestBody UserDTO dto) {
+    return usersService.update(id, dto);
   }
 
   @DeleteMapping("/{id}")

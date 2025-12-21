@@ -35,7 +35,7 @@ public class AccountsController {
     return accountsService.getAccountById(id);
   }
 
-  @GetMapping("/user/{id}")
+  @GetMapping("/users/{id}")
   public List<Account> getAccountsByUserId(@PathVariable int id) {
     return accountsService.getAccountsByUserId(id);
   }

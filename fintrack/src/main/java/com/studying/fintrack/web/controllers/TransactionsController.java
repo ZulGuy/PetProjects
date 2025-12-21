@@ -46,12 +46,12 @@ public class TransactionsController {
         : ResponseEntity.ok(transactionsService.getTransactionById(id));
   }
 
-  @GetMapping("/get-by-user")
-  public ResponseEntity<List<Transaction>> getTransactionsByAccountId(@RequestParam int userId) {
-    return transactionsService.getTransactionsByAccountId(userId) == null
-        || transactionsService.getTransactionsByAccountId(userId).isEmpty()
+  @GetMapping("/users/{id}")
+  public ResponseEntity<List<Transaction>> getTransactionsByAccountId(@PathVariable int id) {
+    return transactionsService.getTransactionsByAccountId(id) == null
+        || transactionsService.getTransactionsByAccountId(id).isEmpty()
         ? ResponseEntity.noContent().build()
-        : ResponseEntity.ok(transactionsService.getTransactionsByAccountId(userId));
+        : ResponseEntity.ok(transactionsService.getTransactionsByAccountId(id));
   }
 
   @GetMapping("/get-by-date")
@@ -65,13 +65,13 @@ public class TransactionsController {
     return null;
   }
 
-  @GetMapping("/get-by-category")
+  @GetMapping("/categories/{id}")
   public ResponseEntity<List<Transaction>> getTransactionsByCategoryId(
-      @RequestParam int categoryId) {
-    return transactionsService.getTransactionsByCategoryId(categoryId).isEmpty()
-        || transactionsService.getTransactionsByCategoryId(categoryId) == null
+      @PathVariable int id) {
+    return transactionsService.getTransactionsByCategoryId(id).isEmpty()
+        || transactionsService.getTransactionsByCategoryId(id) == null
         ? ResponseEntity.noContent().build()
-        : ResponseEntity.ok(transactionsService.getTransactionsByCategoryId(categoryId));
+        : ResponseEntity.ok(transactionsService.getTransactionsByCategoryId(id));
   }
 
   @PostMapping

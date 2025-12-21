@@ -34,10 +34,9 @@ public class AccountsService {
   }
 
   public Account updateAccount(int id, AccountDTO dto) {
-    Account account = accountsRepository.findById(id).orElse(null);
-    if (account != null) {
-      throw new EntityNotFoundException("Account not found in DB!");
-    }
+    Account account = accountsRepository.findById(id).orElseThrow(
+        () -> new EntityNotFoundException("Account not found in DB!")
+    );
     account.setName(dto.getName());
     account.setCurrency(dto.getCurrency());
     return accountsRepository.save(account);
@@ -56,6 +55,8 @@ public class AccountsService {
   }
 
   public List<Account> getAccountsByUserId(int userId) {
-    return accountsRepository.findByUserId(userId);
+    return accountsRepository.findByUserId(userId).orElseThrow(
+        () -> new EntityNotFoundException("Accounts or User author of this accounts not found in DB!")
+    );
   }
 }

@@ -2,6 +2,7 @@ package com.studying.fintrack.domain.services;
 
 import com.studying.fintrack.domain.entities.Category;
 import com.studying.fintrack.domain.repositories.CategoriesRepository;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,12 @@ public class CategoriesService {
     return category;
   }
 
+  public List<Category> getCategoriesByUser(int id) {
+    return categoriesRepository.findAllByUser_Id(id).orElseThrow(
+        () -> new EntityNotFoundException("User not found in DB!")
+    );
+  }
+
   public Category createCategory(Category category) {
     return categoriesRepository.save(category);
   }
@@ -36,8 +43,13 @@ public class CategoriesService {
     categoriesRepository.deleteById(id);
   }
 
-  public Category updateCategory(Category category) {
-    return categoriesRepository.save(category);
+  public Category updateCategory(int id, Category category) {
+    Category updatedCategory = categoriesRepository.findById(id).orElseThrow(
+        () -> new EntityNotFoundException("Category not found in DB!")
+    );
+    updatedCategory.setName(category.getName());
+    updatedCategory.setType(category.getType());
+    return categoriesRepository.save(updatedCategory);
   }
 
 }

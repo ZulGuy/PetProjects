@@ -1,5 +1,7 @@
 package com.studying.fintrack.infra.config;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import com.studying.fintrack.domain.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -58,16 +60,15 @@ public class SecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http
         .csrf(AbstractHttpConfigurer :: disable)
-        .cors(Customizer.withDefaults())
+        .cors(withDefaults())
         .authenticationProvider(authenticationProvider())
-        .sessionManagement(
-            session -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-        )
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers("/api/auth/**").authenticated()
             .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
             .anyRequest().authenticated()
         )
+        .httpBasic(withDefaults())
+        .formLogin(withDefaults())
         .build();
   }
 }

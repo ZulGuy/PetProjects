@@ -19,37 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-  private final UsersRepository usersRepository;
-  private final AuthenticationManager authenticationManager;
-
-  @Autowired
-  public AuthController(UsersRepository usersRepository,
-      AuthenticationManager authenticationManager) {
-    this.usersRepository = usersRepository;
-    this.authenticationManager = authenticationManager;
-  }
-
-  @GetMapping("/login")
-  public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
-    Authentication authentication = authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(authRequest.getUsername(),
-            authRequest.getPassword()));
-    SecurityContext context = SecurityContextHolder.createEmptyContext();
-    context.setAuthentication(authentication);
-    SecurityContextHolder.setContext(context);
-    if (authentication.isAuthenticated()) {
-      System.out.println("From SecurityContext principal: " + SecurityContextHolder.getContext()
-          .getAuthentication().getPrincipal());
-      return ResponseEntity.ok().build();
-    }
-    return ResponseEntity.badRequest().build();
-  }
-
-  @GetMapping("/logout")
-  public ResponseEntity<?> logout() {
-    SecurityContext securityContext = SecurityContextHolder.getContext();
-    securityContext.setAuthentication(null);
-    return ResponseEntity.ok().build();
+  @GetMapping("/me")
+  public ResponseEntity<?> me(Authentication authentication) {
+    return ResponseEntity.ok(authentication.getPrincipal());
   }
 
 }

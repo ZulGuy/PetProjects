@@ -32,6 +32,39 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - createTable:
+            tableName: user_authorities
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authority
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            tableName: user_authorities
+            columnNames: user_id, authority
+            constraintName: pk_user_authorities
+
+        - addForeignKeyConstraint:
+            baseTableName: user_authorities
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_user_authorities_user
+            onDelete: CASCADE
+
+        - createIndex:
+            tableName: user_authorities
+            indexName: idx_user_authorities_user_id
+            columns:
+              - column:
+                  name: user_id
+        - createTable:
             tableName: accounts
             columns:
               - column:
@@ -200,6 +233,9 @@ databaseChangeLog:
             cascadeConstraints: true
         - dropTable:
             tableName: import_jobs
+            cascadeConstraints: true
+        - dropTable:
+            tableName: user_authorities
             cascadeConstraints: true
         - dropTable:
             tableName: users

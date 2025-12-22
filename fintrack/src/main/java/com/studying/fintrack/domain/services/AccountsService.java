@@ -6,6 +6,8 @@ import com.studying.fintrack.domain.repositories.AccountsRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,6 +34,15 @@ public class AccountsService {
     }
     return account;
   }
+
+//  public Account getAccountByIdForUser(int id) {
+//    ;
+//    Account account = accountsRepository.findByIdAndUserId(id, ).orElse(null);
+//    if (account == null) {
+//      throw new EntityNotFoundException("Account not found in DB!");
+//    }
+//    return account;
+//  }
 
   public Account updateAccount(int id, AccountDTO dto) {
     Account account = accountsRepository.findById(id).orElseThrow(

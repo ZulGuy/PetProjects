@@ -31,11 +31,18 @@ public class AuthController {
 
   @GetMapping("/login")
   public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
-   Authentication authentication = authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-   if(authentication.isAuthenticated())
+    Authentication authentication = authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(authRequest.getUsername(),
+            authRequest.getPassword()));
+    SecurityContext context = SecurityContextHolder.createEmptyContext();
+    context.setAuthentication(authentication);
+    SecurityContextHolder.setContext(context);
+    if (authentication.isAuthenticated()) {
+      System.out.println("From SecurityContext principal: " + SecurityContextHolder.getContext()
+          .getAuthentication().getPrincipal());
       return ResponseEntity.ok().build();
-   return ResponseEntity.badRequest().build();
+    }
+    return ResponseEntity.badRequest().build();
   }
 
   @GetMapping("/logout")

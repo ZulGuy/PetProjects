@@ -35,6 +35,11 @@ public class AccountsController {
     return accountsService.getAccountById(id);
   }
 
+  @GetMapping("/for-user/{id}")
+  public Account getAccountByIdForUser(@PathVariable int id) {
+    return accountsService.getAccountById(id);
+  }
+
   @GetMapping("/users/{id}")
   public List<Account> getAccountsByUserId(@PathVariable int id) {
     return accountsService.getAccountsByUserId(id);

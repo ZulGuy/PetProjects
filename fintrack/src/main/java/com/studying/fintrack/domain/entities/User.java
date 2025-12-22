@@ -1,13 +1,18 @@
 package com.studying.fintrack.domain.entities;
 
 import com.studying.fintrack.domain.utils.AuthorityImpl;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,12 +28,14 @@ public class User implements UserDetails {
   private int id;
   @Column(name = "username", nullable = false)
   private String username;
-  @Column(name = "password", nullable = false)
+  @Column(name = "password_hash", nullable = false)
   private String password;
   @Column(name = "created_at", nullable = false)
   private Timestamp createdAt;
-  @Column(name = "authorities", nullable = false)
-  private List<GrantedAuthority> authorities;
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "user_authorities", joinColumns = @JoinColumn(name = "user_id"))
+  @Column(name = "authority")
+  private List<String> authorities = new ArrayList<>();
 
   public User() {
   }
@@ -37,7 +44,7 @@ public class User implements UserDetails {
     this.password = password;
     this.createdAt = createdAt;
     this.username = username;
-    this.authorities = List.of(new AuthorityImpl("ROLE_USER"));
+    this.authorities = List.of("ROLE_USER");
   }
 
   public int getId() {
@@ -76,6 +83,8 @@ public class User implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return authorities;
+    return authorities.stream()
+        .map(AuthorityImpl::new)
+        .toList();
   }
 }

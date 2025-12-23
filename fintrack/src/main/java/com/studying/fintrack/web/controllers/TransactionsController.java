@@ -46,7 +46,7 @@ public class TransactionsController {
         : ResponseEntity.ok(transactionsService.getTransactionById(id));
   }
 
-  @GetMapping("/users/{id}")
+  @GetMapping("/accounts/{id}")
   public ResponseEntity<List<Transaction>> getTransactionsByAccountId(@PathVariable int id) {
     return transactionsService.getTransactionsByAccountId(id) == null
         || transactionsService.getTransactionsByAccountId(id).isEmpty()

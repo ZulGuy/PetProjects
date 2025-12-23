@@ -1,5 +1,6 @@
 package com.studying.fintrack.web.controllers;
 
+import com.studying.fintrack.domain.entities.User;
 import com.studying.fintrack.domain.models.AuthRequest;
 import com.studying.fintrack.domain.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;

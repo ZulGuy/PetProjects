@@ -1,6 +1,7 @@
 package com.studying.fintrack.domain.services;
 
 import com.studying.fintrack.domain.entities.Account;
+import com.studying.fintrack.domain.entities.User;
 import com.studying.fintrack.domain.models.AccountDTO;
 import com.studying.fintrack.domain.repositories.AccountsRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -35,14 +36,12 @@ public class AccountsService {
     return account;
   }
 
-//  public Account getAccountByIdForUser(int id) {
-//    ;
-//    Account account = accountsRepository.findByIdAndUserId(id, ).orElse(null);
-//    if (account == null) {
-//      throw new EntityNotFoundException("Account not found in DB!");
-//    }
-//    return account;
-//  }
+  public Account getAccountByIdForUser(int id) {
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    return accountsRepository.findByIdAndUserId(id, user.getId()).orElseThrow(
+        () -> new EntityNotFoundException("Account or User author of this accounts not found in DB!")
+    );
+  }
 
   public Account updateAccount(int id, AccountDTO dto) {
     Account account = accountsRepository.findById(id).orElseThrow(

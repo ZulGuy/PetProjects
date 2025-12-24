@@ -1,6 +1,7 @@
 package com.studying.fintrack.web.controllers;
 
 import com.studying.fintrack.domain.entities.Transaction;
+import com.studying.fintrack.domain.models.TransactionSearchFilter;
 import com.studying.fintrack.domain.repositories.TransactionsRepository;
 import com.studying.fintrack.domain.services.TransactionsService;
 import com.studying.fintrack.domain.specifications.TransactionSpecification;
@@ -103,28 +104,8 @@ public class TransactionsController {
       @RequestParam(required = false) String to,
       @RequestParam(required = false) List<Integer> categories
   ) {
-    Specification<Transaction> spec = Specification.unrestricted();
-
-    if (categoryId != null) {
-      spec = spec.and(TransactionSpecification.byCategoryId(categoryId));
-    }
-    if (bookedAt != null) {
-      spec = spec.and(TransactionSpecification.byDate(Timestamp.valueOf(bookedAt)));
-    }
-    if (accountId != null) {
-      spec = spec.and(TransactionSpecification.byAccountId(accountId));
-    }
-    if (categories != null && !categories.isEmpty()) {
-      spec = spec.and(TransactionSpecification.byCategories(categories));
-    }
-    if (from != null && to != null) {
-      spec = spec.and(
-          TransactionSpecification.betweenDates(Timestamp.valueOf(from), Timestamp.valueOf(to)));
-    }
-    var transactions = transactionsRepository.findAll(spec);
-    if (transactions.stream().toList().isEmpty())
-      throw new EntityNotFoundException("No transactions found");
-    return transactions.stream().toList();
+    var filter = new TransactionSearchFilter(categoryId, bookedAt, accountId, from, to, categories);
+    return transactionsService.searchTransactions(filter);
   }
 
 }

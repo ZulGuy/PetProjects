@@ -1,10 +1,14 @@
 package com.studying.fintrack.domain.services;
 
 import com.studying.fintrack.domain.entities.Transaction;
+import com.studying.fintrack.domain.models.TransactionSearchFilter;
 import com.studying.fintrack.domain.repositories.TransactionsRepository;
+import com.studying.fintrack.domain.specifications.TransactionSpecification;
+import jakarta.persistence.EntityNotFoundException;
 import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -55,6 +59,31 @@ public class TransactionsService {
 
   public List<Transaction> getTransactionsByCategoryId(int categoryId) {
     return transactionsRepository.findByCategoryId(categoryId);
+  }
+
+  public List<Transaction> searchTransactions(TransactionSearchFilter filter) {
+    Specification<Transaction> spec = Specification.unrestricted();
+
+    if (filter.categoryId() != null) {
+      spec = spec.and(TransactionSpecification.byCategoryId(filter.categoryId()));
+    }
+    if (filter.bookedAt() != null) {
+      spec = spec.and(TransactionSpecification.byDate(Timestamp.valueOf(filter.bookedAt())));
+    }
+    if (filter.accountId() != null) {
+      spec = spec.and(TransactionSpecification.byAccountId(filter.accountId()));
+    }
+    if (filter.categories() != null && !filter.categories().isEmpty()) {
+      spec = spec.and(TransactionSpecification.byCategories(filter.categories()));
+    }
+    if (filter.from() != null && filter.to() != null) {
+      spec = spec.and(
+          TransactionSpecification.betweenDates(Timestamp.valueOf(filter.from()), Timestamp.valueOf(filter.to())));
+    }
+    var transactions = transactionsRepository.findAll(spec);
+    if (transactions.stream().toList().isEmpty())
+      throw new EntityNotFoundException("No transactions found");
+    return transactions.stream().toList();
   }
 
 }

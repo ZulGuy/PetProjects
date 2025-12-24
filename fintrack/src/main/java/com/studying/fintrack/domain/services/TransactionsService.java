@@ -1,6 +1,7 @@
 package com.studying.fintrack.domain.services;
 
 import com.studying.fintrack.domain.entities.Transaction;
+import com.studying.fintrack.domain.entities.User;
 import com.studying.fintrack.domain.models.TransactionSearchFilter;
 import com.studying.fintrack.domain.repositories.TransactionsRepository;
 import com.studying.fintrack.domain.specifications.TransactionSpecification;
@@ -9,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +28,15 @@ public class TransactionsService {
   }
 
   public Transaction getTransactionById(int id) {
+    Transaction transaction = transactionsRepository.findById(id).orElse(null);
+    if (transaction == null) {
+      throw new NullPointerException("Transaction not found in DB!");
+    }
+    return transaction;
+  }
+
+  public Transaction getTransactionByIdForUser(int id) {
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Transaction transaction = transactionsRepository.findById(id).orElse(null);
     if (transaction == null) {
       throw new NullPointerException("Transaction not found in DB!");

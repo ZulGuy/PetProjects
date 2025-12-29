@@ -54,6 +54,20 @@ WORKDIR /build
 
 RUN java -Djarmode=layertools -jar target/app.jar extract --destination target/extracted
 
+# ===== DEV stage (hot reload) =====
+FROM deps as dev
+WORKDIR /workspace
+
+# щоб mvnw працював з /workspace
+COPY --chmod=0755 mvnw /workspace/mvnw
+COPY .mvn/ /workspace/.mvn/
+COPY pom.xml /workspace/pom.xml
+
+EXPOSE 8080
+CMD ["./mvnw", "spring-boot:run", "-DskipTests"]
+
+# ===== DEV stage (hot reload) =====
+
 ################################################################################
 
 # Create a new stage for running the application that contains the minimal

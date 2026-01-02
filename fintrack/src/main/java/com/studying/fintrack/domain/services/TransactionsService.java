@@ -30,13 +30,20 @@ public class TransactionsService {
    */
   public List<Transaction> getAllTransactions() {
     User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    if(user.getAuthorities().contains("ROLE_ADMIN"))
+    if(user.getAuthorities().contains("Admin"))
       return transactionsRepository.findAll();
     return transactionsRepository.findByUserId(user.getId());
   }
 
   public Transaction getTransactionById(int id) {
-    Transaction transaction = transactionsRepository.findById(id).orElse(null);
+    Transaction transaction;
+    User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if(user.getAuthorities().contains("Admin")) {
+      transaction = transactionsRepository.findById(id).orElse(null);
+    }
+    transaction = transactionsRepository.findByIdAndUserId(id, user.getId()).orElseThrow(
+        () -> new EntityNotFoundException("Transaction not found in DB!")
+    );
     if (transaction == null) {
       throw new NullPointerException("Transaction not found in DB!");
     }
@@ -48,27 +55,66 @@ public class TransactionsService {
   }
 
   public void deleteTransaction(int id) {
-    transactionsRepository.deleteById(id);
+    User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if(user.getAuthorities().contains("Admin"))
+      transactionsRepository.deleteById(id);
+    transactionsRepository.deleteByIdAndUserId(id, user.getId());
   }
 
-  public Transaction updateTransaction(Transaction transaction) {
-    return transactionsRepository.save(transaction);
+  public Transaction updateTransaction(int id, Transaction transaction) {
+    User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if(user.getAuthorities().contains("Admin")) {
+      Transaction updatedTransaction = transactionsRepository.findById(id).orElseThrow(
+          () -> new EntityNotFoundException("Transaction not found in DB!")
+      );
+      updatedTransaction.setBookedAt(transaction.getBookedAt());
+      updatedTransaction.setAccount(transaction.getAccount());
+      updatedTransaction.setAmountDecimal(transaction.getAmountDecimal());
+      updatedTransaction.setCategory(transaction.getCategory());
+      updatedTransaction.setCurrency(transaction.getCurrency());
+      updatedTransaction.setRawDescription(transaction.getRawDescription());
+      updatedTransaction.setNote(transaction.getNote());
+      return transactionsRepository.save(updatedTransaction);
+    }
+    Transaction updatedTransaction = transactionsRepository.findByIdAndUserId(id, user.getId()).orElseThrow(
+        () -> new EntityNotFoundException("Transaction not found in DB!")
+    );
+    updatedTransaction.setBookedAt(transaction.getBookedAt());
+    updatedTransaction.setAccount(transaction.getAccount());
+    updatedTransaction.setAmountDecimal(transaction.getAmountDecimal());
+    updatedTransaction.setCategory(transaction.getCategory());
+    updatedTransaction.setCurrency(transaction.getCurrency());
+    updatedTransaction.setRawDescription(transaction.getRawDescription());
+    updatedTransaction.setNote(transaction.getNote());
+    return transactionsRepository.save(updatedTransaction);
   }
 
   public List<Transaction> getTransactionsByAccountId(int accountId) {
-    return transactionsRepository.findByAccountId(accountId);
+    User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if(user.getAuthorities().contains("Admin"))
+      return transactionsRepository.findByAccountId(accountId);
+    return transactionsRepository.findByAccountIdAndUserId(accountId, user.getId());
   }
 
   public List<Transaction> getTransactionsByDate(Timestamp bookedAt) {
-    return transactionsRepository.findByBookedAt(bookedAt);
+    User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if(user.getAuthorities().contains("Admin"))
+      return transactionsRepository.findByBookedAt(bookedAt);
+    return transactionsRepository.findByBookedAtAndUserId(bookedAt, user.getId());
   }
 
   public List<Transaction> getTransactionsByDateBetween(Timestamp from, Timestamp to) {
-    return transactionsRepository.findByBookedAtBetween(from, to);
+    User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if(user.getAuthorities().contains("Admin"))
+      return transactionsRepository.findByBookedAtBetween(from, to);
+    return transactionsRepository.findByBookedAtBetweenAndUserId(from, to, user.getId());
   }
 
   public List<Transaction> getTransactionsByCategoryId(int categoryId) {
-    return transactionsRepository.findByCategoryId(categoryId);
+    User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if(user.getAuthorities().contains("Admin"))
+      return transactionsRepository.findByCategoryId(categoryId);
+    return transactionsRepository.findByCategoryIdAndUserId(categoryId, user.getId());
   }
 
   public List<Transaction> searchTransactions(TransactionSearchFilter filter) {

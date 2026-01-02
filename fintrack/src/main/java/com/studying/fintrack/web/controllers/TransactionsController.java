@@ -86,8 +86,7 @@ public class TransactionsController {
 
   @PutMapping("/{id}")
   public Transaction updateTransaction(@PathVariable int id, Transaction transaction) {
-    transaction.setId(id);
-    return transactionsService.updateTransaction(transaction);
+    return transactionsService.updateTransaction(id, transaction);
   }
 
   @DeleteMapping("/{id}")

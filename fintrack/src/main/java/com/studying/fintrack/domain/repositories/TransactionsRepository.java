@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface TransactionsRepository extends JpaRepository<Transaction, Integer>,
     JpaSpecificationExecutor<Transaction> {
 
+  List<Transaction> findByUserId(int userId);
   Transaction findByIdAndAccount(int id, Account account);
   List<Transaction> findByAccountId(int accountId);
   List<Transaction> findByBookedAtBetween(Timestamp from, Timestamp to);

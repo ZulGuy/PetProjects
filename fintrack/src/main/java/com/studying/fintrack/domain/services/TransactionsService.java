@@ -23,20 +23,19 @@ public class TransactionsService {
     this.transactionsRepository = transactionsRepository;
   }
 
+  /** Це основа, потрібно усі сервісні методи зробити по аналогії цього,
+   * так як тут вже прописано 2 сценарії в залежності від ролі юзера.
+   * Також треба подивитись наскільки сек'юрно написаний цей метод.
+   * @return
+   */
   public List<Transaction> getAllTransactions() {
-    return transactionsRepository.findAll();
+    User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if(user.getAuthorities().contains("ROLE_ADMIN"))
+      return transactionsRepository.findAll();
+    return transactionsRepository.findByUserId(user.getId());
   }
 
   public Transaction getTransactionById(int id) {
-    Transaction transaction = transactionsRepository.findById(id).orElse(null);
-    if (transaction == null) {
-      throw new NullPointerException("Transaction not found in DB!");
-    }
-    return transaction;
-  }
-
-  public Transaction getTransactionByIdForUser(int id) {
-    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     Transaction transaction = transactionsRepository.findById(id).orElse(null);
     if (transaction == null) {
       throw new NullPointerException("Transaction not found in DB!");

@@ -41,44 +41,48 @@ public class Transaction {
   }
 
   public Transaction(Timestamp bookedAt, double amountDecimal, String currency,
-      String rawDescription, Account account) {
+      String rawDescription, User user, Account account) {
     this.bookedAt = bookedAt;
     this.amountDecimal = amountDecimal;
     this.currency = currency;
     this.rawDescription = rawDescription;
+    this.user = user;
     this.account = account;
   }
 
   public Transaction(int id, Timestamp bookedAt, double amountDecimal, String currency,
-      String rawDescription, String note, Account account) {
+      String rawDescription, String note, User user, Account account) {
     this.id = id;
     this.bookedAt = bookedAt;
     this.amountDecimal = amountDecimal;
     this.currency = currency;
     this.rawDescription = rawDescription;
     this.note = note;
+    this.user = user;
     this.account = account;
   }
 
   public Transaction(int id, Timestamp bookedAt, double amountDecimal, String currency,
-      String rawDescription, Account account, Category category) {
+      String rawDescription, User user, Account account, Category category) {
     this.id = id;
     this.bookedAt = bookedAt;
     this.amountDecimal = amountDecimal;
     this.currency = currency;
     this.rawDescription = rawDescription;
+    this.user = user;
     this.account = account;
     this.category = category;
   }
 
   public Transaction(int id, Timestamp bookedAt, double amountDecimal, String currency,
-      String rawDescription, String note, Account account, Category category) {
+      String rawDescription, String note, User user, Account account, Category category) {
     this.id = id;
     this.bookedAt = bookedAt;
     this.amountDecimal = amountDecimal;
     this.currency = currency;
     this.rawDescription = rawDescription;
     this.note = note;
+    this.user = user;
     this.account = account;
     this.category = category;
   }
@@ -129,6 +133,14 @@ public class Transaction {
 
   public void setNote(String note) {
     this.note = note;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 
   public Account getAccount() {

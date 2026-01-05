@@ -145,6 +145,13 @@ databaseChangeLog:
                     referencedTableName: accounts
                     referencedColumnNames: id
               - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_transactions_user_id
+                    referencedTableName: users
+                    referencedColumnNames: id
+              - column:
                   name: booked_at
                   type: TIMESTAMPTZ
                   constraints:

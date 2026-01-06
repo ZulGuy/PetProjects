@@ -25,13 +25,16 @@ public class UsersService {
   }
 
   public User create(UserDTO dto) {
-    if (isUserExists(dto.getUsername()))
+    if (isUserExists(dto.getUsername())) {
       return null;
+    }
     String encodedPassword = passwordEncoder.encode(dto.getPassword());
-    User user = new User(dto.getUsername(), encodedPassword, Timestamp.valueOf(LocalDateTime.now()));
+    User user = new User(dto.getUsername(), encodedPassword,
+        Timestamp.valueOf(LocalDateTime.now()));
     User createdUser = usersRepository.save(user);
-    if(createdUser.getId() > 0)
+    if (createdUser.getId() > 0) {
       return createdUser;
+    }
     throw new EntityNotFoundException("User not created in DB!");
   }
 
@@ -57,16 +60,21 @@ public class UsersService {
 
   public User update(int id, UserDTO dto) {
     User updatedUser = usersRepository.findById(id).orElse(null);
-    if (updatedUser == null)
+    if (updatedUser == null) {
       throw new EntityNotFoundException("User not found in DB!");
-    String encodedPassword = passwordEncoder.encode(dto.getPassword());
-    updatedUser.setPassword(encodedPassword);
-    updatedUser.setUsername(dto.getUsername());
+    }
+    toEntity(updatedUser, dto);
     return usersRepository.save(updatedUser);
   }
 
   public void delete(int id) {
     usersRepository.deleteById(id);
+  }
+
+  private User toEntity(User updatedUser, UserDTO dto) {
+    updatedUser.setUsername(dto.getUsername());
+    updatedUser.setPassword(passwordEncoder.encode(dto.getPassword()));
+    return updatedUser;
   }
 
 }

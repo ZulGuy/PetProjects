@@ -76,7 +76,7 @@ public class TransactionsService {
             .orElseThrow(
                 () -> new EntityNotFoundException("Transaction not found in DB!")
             );
-    toDTO(updatedTransaction, transaction);
+    toEntity(updatedTransaction, transaction);
     return transactionsRepository.save(updatedTransaction);
   }
 
@@ -139,7 +139,7 @@ public class TransactionsService {
     return transactions.stream().toList();
   }
 
-  private Transaction toDTO(Transaction updatedTransaction, Transaction transaction) {
+  private Transaction toEntity(Transaction updatedTransaction, Transaction transaction) {
     updatedTransaction.setBookedAt(transaction.getBookedAt());
     updatedTransaction.setAccount(transaction.getAccount());
     updatedTransaction.setAmountDecimal(transaction.getAmountDecimal());

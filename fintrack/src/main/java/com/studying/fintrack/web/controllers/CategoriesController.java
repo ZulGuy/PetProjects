@@ -1,6 +1,7 @@
 package com.studying.fintrack.web.controllers;
 
 import com.studying.fintrack.domain.entities.Category;
+import com.studying.fintrack.domain.models.CategoryDTO;
 import com.studying.fintrack.domain.services.CategoriesService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class CategoriesController {
   }
 
   @PutMapping("/{id}")
-  public Category updateCategory(@PathVariable int id, Category category) {
+  public Category updateCategory(@PathVariable int id, CategoryDTO category) {
     return categoriesService.updateCategory(id, category);
   }
 

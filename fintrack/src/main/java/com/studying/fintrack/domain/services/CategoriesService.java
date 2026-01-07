@@ -1,6 +1,7 @@
 package com.studying.fintrack.domain.services;
 
 import com.studying.fintrack.domain.entities.Category;
+import com.studying.fintrack.domain.models.CategoryDTO;
 import com.studying.fintrack.domain.repositories.CategoriesRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
@@ -43,13 +44,18 @@ public class CategoriesService {
     categoriesRepository.deleteById(id);
   }
 
-  public Category updateCategory(int id, Category category) {
+  public Category updateCategory(int id, CategoryDTO category) {
     Category updatedCategory = categoriesRepository.findById(id).orElseThrow(
         () -> new EntityNotFoundException("Category not found in DB!")
     );
+    toEntity(updatedCategory, category);
+    return categoriesRepository.save(updatedCategory);
+  }
+
+  private Category toEntity(Category updatedCategory, CategoryDTO category) {
     updatedCategory.setName(category.getName());
     updatedCategory.setType(category.getType());
-    return categoriesRepository.save(updatedCategory);
+    return updatedCategory;
   }
 
 }

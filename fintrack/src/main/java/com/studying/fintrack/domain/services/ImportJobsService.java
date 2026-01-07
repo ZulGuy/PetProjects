@@ -1,7 +1,9 @@
 package com.studying.fintrack.domain.services;
 
 import com.studying.fintrack.domain.entities.ImportJob;
+import com.studying.fintrack.domain.models.ImportJobDTO;
 import com.studying.fintrack.domain.repositories.ImportJobsRepository;
+import com.studying.fintrack.domain.utils.JsonbConvertor;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,12 @@ public class ImportJobsService {
 
   public void deleteImportJobById(int id) {
     importJobsRepository.deleteById(id);
+  }
+
+  private ImportJob toEntity(ImportJob updatedImportJob, ImportJobDTO importJob) {
+    JsonbConvertor jsonbConvertor = new JsonbConvertor();
+    updatedImportJob.setStatus(importJob.getStatus());
+    updatedImportJob.setStatsJson(jsonbConvertor.convertToEntityAttribute(importJob.getStatsJson()));
   }
 
 }

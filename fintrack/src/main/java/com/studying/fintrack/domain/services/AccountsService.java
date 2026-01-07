@@ -43,12 +43,11 @@ public class AccountsService {
   }
 
   public Account updateAccount(int id, AccountDTO dto) {
-    Account account = accountsRepository.findById(id).orElseThrow(
+    Account updatedAccount = accountsRepository.findById(id).orElseThrow(
         () -> new EntityNotFoundException("Account not found in DB!")
     );
-    account.setName(dto.getName());
-    account.setCurrency(dto.getCurrency());
-    return accountsRepository.save(account);
+    toEntity(updatedAccount, dto);
+    return accountsRepository.save(updatedAccount);
   }
 
   public void deleteAccount(int id) {
@@ -67,5 +66,11 @@ public class AccountsService {
     return accountsRepository.findByUserId(userId).orElseThrow(
         () -> new EntityNotFoundException("Accounts or User author of this accounts not found in DB!")
     );
+  }
+
+  private Account toEntity(Account updatedAccount, AccountDTO dto) {
+    updatedAccount.setName(dto.getName());
+    updatedAccount.setCurrency(dto.getCurrency());
+    return updatedAccount;
   }
 }

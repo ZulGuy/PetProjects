@@ -53,6 +53,7 @@ public class ImportJobsService {
     JsonbConvertor jsonbConvertor = new JsonbConvertor();
     updatedImportJob.setStatus(importJob.getStatus());
     updatedImportJob.setStatsJson(jsonbConvertor.convertToEntityAttribute(importJob.getStatsJson()));
+    return updatedImportJob;
   }
 
 }

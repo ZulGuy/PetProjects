@@ -33,6 +33,11 @@ public class UsersController {
     return usersService.create(dto);
   }
 
+  @GetMapping("/{id}")
+  public User getUserById(@PathVariable int id) {
+    return usersService.getUserById(id);
+  }
+
   @GetMapping("/{username}")
   public User getUserByUsername(@PathVariable String username) {
     return usersService.getUserByUsername(username);

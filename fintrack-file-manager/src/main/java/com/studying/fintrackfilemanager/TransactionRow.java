@@ -1,21 +1,25 @@
 package com.studying.fintrackfilemanager;
 
-import java.sql.Timestamp;
+import com.poiji.annotation.ExcelCell;
+import com.poiji.annotation.ExcelCellName;
+import java.time.LocalDate;
 
-public class Transaction {
+public class TransactionRow {
 
-  private Timestamp bookedAt;
+  @ExcelCell(1)
+  private String bookedAt;
+
+  @ExcelCell(9)
   private double amountDecimal;
+
+  @ExcelCell(8)
   private String currency;
 
-  public Transaction() {
-  }
-
-  public Timestamp getBookedAt() {
+  public String getBookedAt() {
     return bookedAt;
   }
 
-  public void setBookedAt(Timestamp bookedAt) {
+  public void setBookedAt(String bookedAt) {
     this.bookedAt = bookedAt;
   }
 
@@ -35,4 +39,3 @@ public class Transaction {
     this.currency = currency;
   }
 }
-

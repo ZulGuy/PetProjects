@@ -1,5 +1,8 @@
 package com.studying.fintrackfilemanager.storage;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+@ConfigurationProperties("storage")
 public class StorageProperties {
 
   private String location = "fileStorage";

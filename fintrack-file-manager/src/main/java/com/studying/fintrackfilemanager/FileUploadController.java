@@ -2,9 +2,11 @@ package com.studying.fintrackfilemanager;
 
 import com.studying.fintrackfilemanager.storage.StorageFileNotFoundException;
 import com.studying.fintrackfilemanager.storage.StorageService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +28,12 @@ public class FileUploadController {
   public String handleFileUpload(@RequestParam("file")MultipartFile file) {
     storageService.store(file);
     return "File uploaded successfully";
+  }
+
+  @GetMapping("/convert")
+  public List<TransactionDTO> convertExcelToDB(@RequestParam("file") String fileLocation){
+    TransactionsService transactionsService = new TransactionsService();
+    return transactionsService.excelDataToListOfObjets_withPOIJI(fileLocation);
   }
 
   @ExceptionHandler(StorageFileNotFoundException.class)

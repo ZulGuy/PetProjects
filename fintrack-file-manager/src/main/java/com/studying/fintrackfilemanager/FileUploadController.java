@@ -33,7 +33,9 @@ public class FileUploadController {
   @GetMapping("/convert")
   public List<TransactionDTO> convertExcelToDB(@RequestParam("file") String fileLocation){
     TransactionsService transactionsService = new TransactionsService();
-    return transactionsService.excelDataToListOfObjets_withPOIJI(fileLocation);
+    List<TransactionDTO> transactions = transactionsService.excelDataToListOfObjets_withPOIJI(fileLocation);
+    storageService.deleteAll();
+    return transactions;
   }
 
   @ExceptionHandler(StorageFileNotFoundException.class)

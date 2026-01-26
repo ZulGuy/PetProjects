@@ -20,15 +20,19 @@ public class TransactionsService {
         .headerStart(23)
         .build();
     List<TransactionRow> rows = Poiji.fromExcel(new File(fileLocation), TransactionRow.class, options);
+    for (TransactionRow row : rows) {
+      if(row.getBookedAt() == null || row.getAmountDecimal() == 0) {
+        int index = rows.indexOf(row);
+        rows = rows.subList(0,index);
+        break;
+      }
+    }
     return rows.stream()
         .filter(r -> r.getBookedAt() != null && !r.getBookedAt().trim().isEmpty())
         .filter(r -> Math.abs(r.getAmountDecimal()) > 1e-9)
         .map(r -> {
           String s = r.getBookedAt().trim();
-
-          // інколи може приїхати "31.12.2025 12:34" або інший формат → тоді треба розширити парсер
           LocalDate d = LocalDate.parse(s, DMY);
-
           TransactionDTO dto = new TransactionDTO();
           dto.setBookedAt(java.sql.Timestamp.valueOf(d.atStartOfDay()));
           dto.setAmountDecimal(r.getAmountDecimal());

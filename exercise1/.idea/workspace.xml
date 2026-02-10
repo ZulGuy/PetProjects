@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b2233e7a-410c-46c4-9d62-17a31262a908" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/branching/BreakStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/branching/BreakStatement.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="38oHMtKlRKCJK7cnv6MpLHIeZ6D" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ArithmeticOperator.executor": "Run",
+    "Application.Array.executor": "Run",
+    "Application.AssignmentOperator.executor": "Run",
+    "Application.BasicInput.executor": "Run",
+    "Application.BasicOutput.executor": "Run",
+    "Application.BitwiseBitshiftOperator.executor": "Run",
+    "Application.BreakStatement.executor": "Run",
+    "Application.CharExample.executor": "Run",
+    "Application.ConditionalOperator.executor": "Run",
+    "Application.DataType.executor": "Run",
+    "Application.DoWhileLoop.executor": "Run",
+    "Application.EqualityRelationalOperator.executor": "Run",
+    "Application.ForEachLoop.executor": "Run",
+    "Application.ForLoop.executor": "Run",
+    "Application.IfElseStatement.executor": "Run",
+    "Application.IfLadderNestedIfStatement.executor": "Run",
+    "Application.InfiniteLoop.executor": "Run",
+    "Application.JavaComments.executor": "Run",
+    "Application.JavaNumbers.executor": "Run",
+    "Application.MultiDimensionalArrays.executor": "Run",
+    "Application.OperatorPrecedence.executor": "Run",
+    "Application.SearchingInArrays.executor": "Run",
+    "Application.SortingArray.executor": "Run",
+    "Application.SwitchCaseStatement.executor": "Run",
+    "Application.TernaryOperator.executor": "Run",
+    "Application.TypeCasting.executor": "Run",
+    "Application.UnaryOperator.executor": "Run",
+    "Application.Variables.executor": "Run",
+    "Application.WhileLoop.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/Repository/PetProjects/exercise1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.28774.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-IU-251.28774.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b2233e7a-410c-46c4-9d62-17a31262a908" name="Changes" comment="" />
+      <created>1769458959935</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1769458959935</updated>
+      <workItem from="1769458961063" duration="2007000" />
+      <workItem from="1769517488294" duration="4000" />
+      <workItem from="1769626205128" duration="5300000" />
+      <workItem from="1769708709396" duration="5393000" />
+      <workItem from="1769807409223" duration="6000" />
+      <workItem from="1769879995906" duration="3924000" />
+      <workItem from="1769979533619" duration="2727000" />
+      <workItem from="1770545733272" duration="7528000" />
+      <workItem from="1770568393953" duration="6626000" />
+      <workItem from="1770592182567" duration="1088000" />
+      <workItem from="1770663716470" duration="3697000" />
+      <workItem from="1770751036247" duration="2093000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/variable/Variables.java</url>
+          <line>2</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

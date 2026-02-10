@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" th:href="@{/css/schema.css}">
+  <title>Schema</title>
+</head>
+<body>
+  <div id="back">
+<form th:action="@{../back}" th:method="get">
+  <input type="submit" value="Back">
+</form>
+</div>
+<div id="main">
+<form th:action="@{../client/showSchema}" th:method="POST">
+  <label for="sourceDb">Database</label><input list="sourceOptions" id="sourceDb" name="sourceDb">
+  <datalist id="sourceOptions">
+    <option value="Microsoft SQL server">
+    <option value="Oracle">
+    <option value="IBM DB2">
+    <option value="MySQL">
+    <option value="PostgreSQL">
+  </datalist><br>
+  <label for="url">URL</label><input type="text" id="url" name="url"><br>
+  <label for="username">Username</label><input type="text" id="username" name="username"><br>
+  <label for="password">Password</label><input type="text" id="password" name="password"><br>
+  <input type="submit" name="action" value="Show schema">
+</form>
+<p>Schema:</p>
+<!--/*@thymesVar id="showResult" type="java.lang.String"*/-->
+<div th:id="showResult" th:name="showResult" th:utext="${showResult}"></div>
+</div>
+</body>
+</html>

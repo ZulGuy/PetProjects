@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/editor.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/sql/sql.min.js"></script>
+  <title>Editor</title>
+</head>
+<body>
+  <div id="main">
+<div id="exit">
+<form th:action="@{../editor/exit}" th:method="get">
+  <input type="submit" id="exit_button" value="Exit">
+</form>
+</div>
+<div id="editor">
+
+<form th:action="@{../client/editor}" th:method="post">
+<input type="submit" name="action" value="Execute query">
+  <label> Enter your SQL-query here:
+    <!--/*@thymesVar id="query" type="java.lang.String"*/-->
+    <textarea th:id="query" th:name="query" rows="20" cols="200" th:text="${session.query}"></textarea>
+    <script>
+      var textarea = document.getElementById("query");
+      var editor = CodeMirror.fromTextArea(textarea, {
+        lineNumbers: true,
+        mode: "text/x-sql",
+      });
+      editor.getWrapperElement().style.fontSize = "16px";
+      editor.getWrapperElement().style.backgroundColor = "cadetblue";
+    </script>
+  </label>
+<!--  <input type="submit" name="action" value="Save SQL script">-->
+</form>
+<form action="/schema/compare" method="GET">
+  <input type="submit" value="Compare Schemas">
+</form>
+
+<form action="/schema/show" method="GET">
+  <input type="submit" value="Browse Schemas">
+</form>
+</div>
+
+</div>
+<p>Query Results:</p>
+  <!--/*@thymesVar id="queryResult" type="java.lang.String"*/-->
+  <div th:id="queryResult" th:name="queryResult" th:utext="${queryResult}"></div>
+</body>
+</html>

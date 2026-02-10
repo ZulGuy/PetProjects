@@ -1,0 +1,10 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark px-4">
+  <div class="navbar-nav gap-2">
+    <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Головна</a>
+    <a class="nav-link" routerLink="/projects" routerLinkActive="active">Проєкти</a>
+    <a *ngIf="canManageUsers()" class="nav-link" routerLink="/users" routerLinkActive="active">Користувачі</a>
+    <a class="nav-link" routerLink="/profile" routerLinkActive="active">Профіль</a>
+    <a *ngIf="canManageUsers()" class="nav-link"routerLink="/admin/invite">Запросити користувача</a>
+    <a class="nav-link" routerLink="/logout" routerLinkActive="active">Вийти</a>
+  </div>
+</nav>

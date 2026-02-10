@@ -1,0 +1,33 @@
+.navbar {
+  height: 60px;
+  background-color: #212529; // темний фон вручну (як у bg-dark)
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .nav-link {
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 4px;
+      color: #ffffff;
+
+      &.active {
+        background-color: #495057;
+        color: #ffffff;
+      }
+
+      &:hover {
+        background-color: #596275;
+        color: #ffffff;
+      }
+
+      &:focus {
+        color: #ffffff;
+      }
+    }
+  }
+}

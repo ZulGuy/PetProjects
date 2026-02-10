@@ -1,0 +1,48 @@
+.users-page {
+  .search-input,
+  .users-per-page-select {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    transition: box-shadow 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #86b7fe;
+      box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+    }
+  }
+
+  .user-table {
+    th, td {
+      vertical-align: middle;
+      padding: 12px;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.35rem 0.55rem;
+      border-radius: 0.3rem;
+    }
+
+    .btn {
+      font-size: 0.8rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+  }
+
+  .pagination-controls {
+    .btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+    }
+
+    span {
+      font-weight: 500;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<div class="container mt-5" style="max-width: 500px;">
+  <h2 class="mb-4 text-center">Реєстрація</h2>
+  <form (ngSubmit)="submit()" #f="ngForm" class="border rounded p-4 shadow-sm bg-light">
+
+    <div class="mb-3">
+      <label for="username" class="form-label">Ім'я користувача</label>
+      <input
+        type="text"
+        id="username"
+        class="form-control"
+        [(ngModel)]="form.username"
+        name="username"
+        required
+        placeholder="Введіть ім'я користувача"
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        id="email"
+        class="form-control"
+        [(ngModel)]="form.email"
+        name="email"
+        required
+        placeholder="Введіть email"
+      />
+    </div>
+
+    <div class="mb-4">
+      <label for="password" class="form-label">Пароль</label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        [(ngModel)]="form.password"
+        name="password"
+        required
+        placeholder="Введіть пароль"
+      />
+    </div>
+
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary">Зареєструватися</button>
+    </div>
+
+  </form>
+</div>

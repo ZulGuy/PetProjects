@@ -1,0 +1,25 @@
+<div class="modal-backdrop">
+  <div class="modal-dialog bg-white p-4 rounded shadow">
+    <h5>Ролі користувача: {{ user.name }}</h5>
+
+    <ul class="list-group mb-3">
+      <li class="list-group-item d-flex justify-content-between align-items-center"
+          *ngFor="let role of user.roles">
+        {{ role }}
+        <button class="btn btn-sm btn-outline-danger" (click)="removeRole(role)">Видалити</button>
+      </li>
+    </ul>
+
+    <div class="input-group mb-3">
+      <select class="form-select" [(ngModel)]="selectedRole">
+        <option value="" disabled selected>Оберіть роль</option>
+        <option *ngFor="let role of availableRoles" [value]="role">{{ role }}</option>
+      </select>
+      <button class="btn btn-outline-primary" (click)="addRole()">Додати</button>
+    </div>
+
+    <div class="text-end">
+      <button class="btn btn-secondary" (click)="closeModal()">Закрити</button>
+    </div>
+  </div>
+</div>

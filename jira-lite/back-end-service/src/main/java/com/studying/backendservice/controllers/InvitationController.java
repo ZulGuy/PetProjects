@@ -1,0 +1,54 @@
+package com.studying.backendservice.controllers;
+
+import com.studying.backendservice.dto.UserDTO;
+import com.studying.backendservice.services.InvitationService;
+import com.studying.backendservice.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/invitations")
+@PreAuthorize("@securityService.haveAdminAccess(principal)")
+public class InvitationController {
+  private final InvitationService invitationService;
+  private final UserService userService;
+
+  @Autowired
+  public InvitationController(InvitationService invitationService, UserService userService) {
+    this.invitationService = invitationService;
+    this.userService = userService;
+  }
+
+  @PostMapping("/send")
+  public ResponseEntity<?> send(@RequestParam String email) {
+    invitationService.sendInvitation(email);
+    return ResponseEntity.ok("Запрошення надіслано");
+  }
+
+  @GetMapping("/validate")
+  public ResponseEntity<Boolean> validate(@RequestParam String token) {
+    return ResponseEntity.ok(invitationService.validateToken(token));
+  }
+
+  @PostMapping("/register")
+  public ResponseEntity<?> register(@RequestParam String token, @RequestBody UserDTO payload) {
+    if (!invitationService.validateToken(token)) {
+      return ResponseEntity.badRequest().body("Невалідний або використаний токен");
+    }
+
+    String email = invitationService.getEmailByToken(token);
+    payload.setEmail(email);
+    userService.register(payload);
+    invitationService.markUsed(token);
+
+    return ResponseEntity.ok("Користувача створено");
+  }
+}
+

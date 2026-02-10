@@ -1,0 +1,13 @@
+.project-layout {
+  display: flex;
+  height: 100%;
+  overflow: hidden; // 🔒 прибрати глобальні скролбари
+}
+
+.project-content {
+  flex-grow: 1;
+  padding: 24px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}

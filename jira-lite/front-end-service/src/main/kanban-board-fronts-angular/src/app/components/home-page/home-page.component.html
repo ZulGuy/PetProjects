@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Головна</h2>
+
+  <div *ngIf="recentProject; else noRecent">
+    <h5>Останній проєкт:</h5>`
+    <div class="card shadow-sm p-3">
+      <h5 class="card-title">{{ recentProject.name }}</h5>
+      <p class="card-text text-muted">{{ recentProject.description }}</p>
+      <a [routerLink]="['/projects', recentProject.id]" class="btn btn-sm btn-outline-primary">
+        Перейти до проєкту
+      </a>
+    </div>
+  </div>
+
+  <ng-template #noRecent>
+    <p class="text-muted">Ви ще не відкривали жоден проєкт.</p>
+  </ng-template>
+</div>

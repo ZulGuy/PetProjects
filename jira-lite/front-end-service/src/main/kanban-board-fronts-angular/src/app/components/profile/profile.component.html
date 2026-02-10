@@ -1,0 +1,12 @@
+<div class="container mt-4">
+  <div class="card p-4">
+    <h2 class="card-title">Мій профіль</h2>
+    <p><strong>Ім'я:</strong> {{ user?.name }}</p>
+    <p><strong>Email:</strong> {{ user?.email }}</p>
+    <p><strong>Статус:</strong>
+      <span class="badge" [class.bg-success]="user?.active" [class.bg-danger]="!user?.active">
+        {{ user?.active ? 'Активний' : 'Неактивний' }}
+      </span>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h2 class="h5 fw-bold mb-4">Список проєктів</h2>
+  <button class="btn btn-primary mb-3" (click)="showCreateProjectModal = true">Створити Проект</button>
+  <app-create-project-modal
+    *ngIf="showCreateProjectModal"
+    (close)="showCreateProjectModal = false"
+    (projectCreated)="handleProjectCreated($event)">
+  </app-create-project-modal>
+  <div class="row row-cols-1 row-cols-md-2 g-3">
+    <div class="col" *ngFor="let project of projects">
+      <div class="project-card card border-0 shadow-sm h-100"
+           (click)="openProject(project)">
+        <button class="btn btn-sm btn-outline-secondary" (click)="deleteProject(project, $event)">Видалити Проект</button>
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <div>
+            <h5 class="card-title mb-1">{{ project.name }}</h5>
+            <p class="card-text text-muted small mb-0">Натисніть для відкриття</p>
+          </div>
+          <i class="bi bi-chevron-right fs-5 text-muted"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

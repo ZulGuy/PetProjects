@@ -1,0 +1,40 @@
+<div *ngIf="checkManageAccess()" class="container mt-4">
+  <h2 class="mb-3">Учасники проєкту</h2>
+
+  <button *ngIf="checkManageAccess()" class="btn btn-primary mb-3" (click)="openAddUserModal()">+ Додати користувача</button>
+
+  <table class="table table-hover table-bordered shadow-sm rounded bg-white">
+  <thead class="table-light">
+    <tr>
+      <th>Ім’я</th>
+      <th>Email</th>
+      <th>Ролі</th>
+      <th>Дії</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of projectUsers">
+      <td>{{ user.name }}</td>
+      <td>{{ user.email }}</td>
+      <td *ngIf="user.roles && user.roles.length">{{ user.roles.join(', ') }}</td>
+      <td>
+        <button *ngIf="checkManageAccess()" class="btn btn-sm btn-outline-secondary" (click)="openRoleModal(user)">Ролі</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <app-role-modal
+    *ngIf="selectedUser && checkManageAccess()"
+    [projectId]="projectId"
+    [user]="selectedUser"
+    (rolesChanged)="loadUsers()"
+    (close)="selectedUser = null">
+  </app-role-modal>
+  <app-add-user-modal
+    *ngIf="addingUser && projectId && checkManageAccess()"
+    [projectId]="projectId"
+    (userAddedToProject)="loadUsers()"
+    (close)="addingUser = false">
+  </app-add-user-modal>
+</div>
+

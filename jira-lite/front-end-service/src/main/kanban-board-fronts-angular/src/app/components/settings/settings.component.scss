@@ -1,0 +1,29 @@
+table {
+  font-size: 0.95rem;
+
+  th {
+    background-color: #f8f9fa;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 5px 8px;
+    border-radius: 6px;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+}
+
+button.btn-primary {
+  font-weight: 500;
+}

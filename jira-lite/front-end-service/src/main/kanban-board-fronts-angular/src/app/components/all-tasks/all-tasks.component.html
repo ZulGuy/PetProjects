@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h4>Усі задачі проєкту</h4>
+
+  <div class="row g-2 mb-3">
+    <div class="col"><input class="form-control" placeholder="Тема" [(ngModel)]="filters.summary" (input)="applyFilters()"/></div>
+    <div class="col"><input class="form-control" placeholder="Опис" [(ngModel)]="filters.description" (input)="applyFilters()"/></div>
+    <div class="col"><input class="form-control" placeholder="Assignee" [(ngModel)]="filters.assignee" (input)="applyFilters()"/></div>
+    <div class="col"><input class="form-control" placeholder="Reporter" [(ngModel)]="filters.reporter" (input)="applyFilters()"/></div>
+    <div class="col">
+      <select class="form-select" [(ngModel)]="filters.status" (change)="applyFilters()">
+        <option value="">Будь-який статус</option>
+        <option value="TODO">TODO</option>
+        <option value="IN_PROGRESS">IN_PROGRESS</option>
+        <option value="DONE">DONE</option>
+      </select>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-sm">
+    <thead>
+    <tr>
+      <th>Тема</th>
+      <th>Опис</th>
+      <th>Assignee</th>
+      <th>Reporter</th>
+      <th>Статус</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let task of paginatedTasks" style="cursor:pointer"
+        (click)="goToTask(task.id)">
+      <td>{{ task.summary }}</td>
+      <td>{{ task.description }}</td>
+      <td>{{ getUserNameById(task.assigneeId) }}</td>
+      <td>{{ getUserNameById(task.initiatorId) }}</td>
+      <td>{{ task.status }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-between align-items-center mt-2">
+    <button class="btn btn-secondary" (click)="prevPage()" [disabled]="currentPage === 1">← Назад</button>
+    <span>Сторінка {{ currentPage }} з {{ totalPages }}</span>
+    <button class="btn btn-secondary" (click)="nextPage()" [disabled]="currentPage === totalPages">Вперед →</button>
+  </div>
+</div>

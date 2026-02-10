@@ -1,0 +1,51 @@
+<div class="container mt-4" *ngIf="task">
+  <h3>Задача #{{ task.id }}</h3>
+
+  <div class="mb-3">
+    <label class="form-label fw-bold">Назва задачі</label>
+    <input class="form-control" [(ngModel)]="task.summary" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label fw-bold">Опис</label>
+    <textarea class="form-control" rows="3" [(ngModel)]="task.description"></textarea>
+  </div>
+
+  <div class="mb-3 row">
+    <div class="col">
+      <label class="form-label fw-bold">Assignee</label>
+      <select class="form-select" [(ngModel)]="task.assigneeId">
+        <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+      </select>
+    </div>
+    <div class="col">
+      <label class="form-label fw-bold">Reporter</label>
+      <select class="form-select" [(ngModel)]="task.initiatorId">
+        <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <button *ngIf="canEdit" class="btn btn-primary me-2" (click)="save()">💾 Зберегти</button>
+
+  <hr />
+
+  <h5>Коментарі</h5>
+  <div *ngIf="canEdit" class="mb-3">
+    <textarea class="form-control" [(ngModel)]="newComment" rows="2" placeholder="Залишити коментар..."></textarea>
+    <button class="btn btn-secondary mt-2" (click)="addComment()">Додати</button>
+  </div>
+
+  <ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let comment of comments">
+      <div>
+        <strong>{{ comment.authorName }}</strong>: {{ comment.description }}
+      </div>
+      <div *ngIf="canEdit">
+        <button class="btn btn-sm btn-outline-secondary me-1" (click)="editComment(comment)">✏️</button>
+        <button class="btn btn-sm btn-danger" (click)="deleteComment(comment.id)">🗑️</button>
+      </div>
+    </li>
+  </ul>
+
+</div>

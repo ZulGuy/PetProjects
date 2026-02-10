@@ -1,0 +1,35 @@
+<div class="modal-backdrop">
+  <div class="modal-dialog bg-white p-4 rounded shadow">
+    <h5>Додати користувача до проєкту</h5>
+
+    <div class="form-group mb-3">
+      <input type="text"
+             class="form-control"
+             placeholder="Пошук користувача"
+             [(ngModel)]="searchTerm"
+             (input)="filterUsers()">
+    </div>
+    <pre class="text-muted small">Знайдено: {{ filteredUsers.length }} користувачів</pre>
+
+    <div class="form-group mb-3">
+      <select class="form-select" [(ngModel)]="selectedUserId">
+        <option value="" disabled selected>Оберіть користувача</option>
+        <option *ngFor="let user of filteredUsers" [ngValue]="user.id">
+          {{ user.name }} ({{ user.email }})
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <select class="form-select" [(ngModel)]="selectedRole">
+        <option [ngValue]="null" disabled>Оберіть роль</option>
+        <option *ngFor="let role of availableRoles" [ngValue]="role">{{ role }}</option>
+      </select>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-secondary" (click)="closeModal()">Скасувати</button>
+      <button class="btn btn-primary" (click)="addUser()">Додати</button>
+    </div>
+  </div>
+</div>

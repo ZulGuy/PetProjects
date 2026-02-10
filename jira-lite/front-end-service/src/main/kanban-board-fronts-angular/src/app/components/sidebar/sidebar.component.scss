@@ -1,0 +1,92 @@
+.sidebar {
+  width: 220px;
+  background-color: #212529; // Bootstrap dark
+  color: #fff;
+  height: 100vh;
+  padding: 16px 12px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+  transition: width 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  &.collapsed {
+    width: 60px;
+
+    .project-title,
+    .project-desc,
+    .label {
+      display: none;
+    }
+
+    .sidebar-links {
+      margin-top: 48px;
+    }
+
+    .sidebar-links li {
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    .collapse-btn {
+      left: 12px;
+    }
+  }
+
+  .collapse-btn {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .project-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 60px 0 4px 0;
+    padding-left: 8px;
+  }
+
+  .project-desc {
+    font-size: 0.85rem;
+    color: #adb5bd;
+    margin-bottom: 20px;
+    padding-left: 8px;
+  }
+
+  .sidebar-links {
+    padding: 0;
+    margin: 0;
+
+    li {
+      cursor: pointer;
+      margin-bottom: 6px;
+      transition: background 0.2s;
+
+      &:hover {
+        background-color: #2e2e45;
+      }
+
+      &.active {
+        background-color: #3f3f66;
+        font-weight: bold;
+      }
+
+      .icon {
+        font-size: 18px;
+        width: 24px;
+        text-align: center;
+        color: #fff;
+      }
+
+      .label {
+        color: #fff;
+      }
+    }
+  }
+}

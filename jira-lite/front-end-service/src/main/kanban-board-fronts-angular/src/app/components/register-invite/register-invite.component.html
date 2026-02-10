@@ -1,0 +1,11 @@
+<div *ngIf="!valid && checked">
+  <p class="text-danger">Недійсне або використане запрошення</p>
+</div>
+
+<div *ngIf="valid">
+  <form (ngSubmit)="submit()">
+    <input type="text" [(ngModel)]="user.name" name="name" placeholder="Ім'я" required>
+    <input type="password" [(ngModel)]="user.password" name="password" placeholder="Пароль" required>
+    <button type="submit">Зареєструватися</button>
+  </form>
+</div>

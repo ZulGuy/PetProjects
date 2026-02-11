@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2233e7a-410c-46c4-9d62-17a31262a908" name="Changes" comment="" />
+    <list default="true" id="b2233e7a-410c-46c4-9d62-17a31262a908" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/method/MethodExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/method/MethodExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/method/MethodOverloading.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/method/MethodOverloading.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,6 +27,9 @@
   &quot;associatedIndex&quot;: 3
 }</component>
   <component name="ProjectId" id="38oHMtKlRKCJK7cnv6MpLHIeZ6D" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
@@ -50,6 +56,8 @@
     "Application.JavaComments.executor": "Run",
     "Application.JavaNumbers.executor": "Run",
     "Application.LabeledLoops.executor": "Run",
+    "Application.MethodExample.executor": "Run",
+    "Application.MethodOverloading.executor": "Run",
     "Application.MultiDimensionalArrays.executor": "Run",
     "Application.OperatorPrecedence.executor": "Run",
     "Application.ReturnStatement.executor": "Run",
@@ -59,6 +67,7 @@
     "Application.TernaryOperator.executor": "Run",
     "Application.TypeCasting.executor": "Run",
     "Application.UnaryOperator.executor": "Run",
+    "Application.VarArgsExample.executor": "Run",
     "Application.Variables.executor": "Run",
     "Application.WhileLoop.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -103,7 +112,7 @@
       <workItem from="1770592182567" duration="1088000" />
       <workItem from="1770663716470" duration="3697000" />
       <workItem from="1770751036247" duration="2366000" />
-      <workItem from="1770809507232" duration="3536000" />
+      <workItem from="1770809507232" duration="11179000" />
     </task>
     <servers />
   </component>

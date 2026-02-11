@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2233e7a-410c-46c4-9d62-17a31262a908" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/branching/BreakStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/branching/BreakStatement.java" afterDir="false" />
-    </list>
+    <list default="true" id="b2233e7a-410c-46c4-9d62-17a31262a908" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,6 +38,7 @@
     "Application.BreakStatement.executor": "Run",
     "Application.CharExample.executor": "Run",
     "Application.ConditionalOperator.executor": "Run",
+    "Application.ContinueStatement.executor": "Run",
     "Application.DataType.executor": "Run",
     "Application.DoWhileLoop.executor": "Run",
     "Application.EqualityRelationalOperator.executor": "Run",
@@ -50,8 +49,10 @@
     "Application.InfiniteLoop.executor": "Run",
     "Application.JavaComments.executor": "Run",
     "Application.JavaNumbers.executor": "Run",
+    "Application.LabeledLoops.executor": "Run",
     "Application.MultiDimensionalArrays.executor": "Run",
     "Application.OperatorPrecedence.executor": "Run",
+    "Application.ReturnStatement.executor": "Run",
     "Application.SearchingInArrays.executor": "Run",
     "Application.SortingArray.executor": "Run",
     "Application.SwitchCaseStatement.executor": "Run",
@@ -101,7 +102,8 @@
       <workItem from="1770568393953" duration="6626000" />
       <workItem from="1770592182567" duration="1088000" />
       <workItem from="1770663716470" duration="3697000" />
-      <workItem from="1770751036247" duration="2093000" />
+      <workItem from="1770751036247" duration="2366000" />
+      <workItem from="1770809507232" duration="2676000" />
     </task>
     <servers />
   </component>

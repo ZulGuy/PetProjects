@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="19489db9-9d6f-4909-b933-0530e180d826" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/packageone/Cat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/packageone/Cat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/packageone/Dog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/packageone/Dog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/packagetwo/Bee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/packagetwo/Bee.java" afterDir="false" />
-    </list>
+    <list default="true" id="19489db9-9d6f-4909-b933-0530e180d826" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +29,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Bee.executor": "Run",
     "Application.Cat.executor": "Run",
+    "Application.Dog.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -62,7 +60,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1770846615511</updated>
-      <workItem from="1770846616600" duration="317000" />
+      <workItem from="1770846616600" duration="1190000" />
     </task>
     <servers />
   </component>

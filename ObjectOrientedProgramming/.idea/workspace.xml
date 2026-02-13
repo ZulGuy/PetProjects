@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0d00e24-dd27-4eda-9410-6e5193ddb4b7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/packagetest/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/packagetest/MainTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/staticexample/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/staticexample/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/staticexample/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/staticexample/Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +34,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.InnerClassTest.executor": "Run",
+    "Application.LocalInnerClassExample.executor": "Run",
     "Application.MainTest.executor": "Run",
+    "Application.OverrideTest.executor": "Run",
+    "Application.StaticNestedTest.executor": "Run",
+    "Application.Test.executor": "Run",
+    "Application.TestInheritance.executor": "Run",
+    "Application.ThisKeyword.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -66,7 +72,7 @@
       <option name="presentableId" value="Default" />
       <updated>1770926328047</updated>
       <workItem from="1770926329210" duration="5054000" />
-      <workItem from="1771006405895" duration="343000" />
+      <workItem from="1771006405895" duration="8159000" />
     </task>
     <servers />
   </component>

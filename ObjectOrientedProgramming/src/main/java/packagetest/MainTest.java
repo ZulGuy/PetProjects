@@ -22,7 +22,7 @@ public class MainTest {
 
     Multiply multi = new Multiply();
     System.out.println(number1 + " * " + number2 + " = " + multi.multiplyNumbers(number1, number2));
-    
+
     //name conflict
 //    packageoperation2.Sum
 

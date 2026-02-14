@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f0d00e24-dd27-4eda-9410-6e5193ddb4b7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/staticexample/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/staticexample/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AccessModifier/src/main/java/packagetwo/Bee.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AccessModifier/src/main/java/packagetwo/Bee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/anonymousclasses/Animals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/anonymousclasses/Animals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/anonymousclasses/Cheetah.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/anonymousclasses/Cheetah.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/anonymousclasses/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/anonymousclasses/MainTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +18,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -34,11 +38,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.AbstractTest.executor": "Run",
+    "Application.EncapsulationTest.executor": "Run",
+    "Application.FinalTest.executor": "Run",
     "Application.InnerClassTest.executor": "Run",
+    "Application.InterfaceTest.executor": "Run",
     "Application.LocalInnerClassExample.executor": "Run",
     "Application.MainTest.executor": "Run",
     "Application.OverrideTest.executor": "Run",
     "Application.StaticNestedTest.executor": "Run",
+    "Application.SupeThisTest.executor": "Run",
     "Application.Test.executor": "Run",
     "Application.TestInheritance.executor": "Run",
     "Application.ThisKeyword.executor": "Run",
@@ -72,7 +81,8 @@
       <option name="presentableId" value="Default" />
       <updated>1770926328047</updated>
       <workItem from="1770926329210" duration="5054000" />
-      <workItem from="1771006405895" duration="8159000" />
+      <workItem from="1771006405895" duration="9441000" />
+      <workItem from="1771072549915" duration="10203000" />
     </task>
     <servers />
   </component>

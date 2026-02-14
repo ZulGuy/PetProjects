@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0d00e24-dd27-4eda-9410-6e5193ddb4b7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../AccessModifier/src/main/java/packagetwo/Bee.java" beforeDir="false" afterPath="$PROJECT_DIR$/../AccessModifier/src/main/java/packagetwo/Bee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/anonymousclasses/Animals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/anonymousclasses/Animals.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/anonymousclasses/Cheetah.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/anonymousclasses/Cheetah.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/anonymousclasses/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/anonymousclasses/MainTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="f0d00e24-dd27-4eda-9410-6e5193ddb4b7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +13,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -82,7 +78,7 @@
       <updated>1770926328047</updated>
       <workItem from="1770926329210" duration="5054000" />
       <workItem from="1771006405895" duration="9441000" />
-      <workItem from="1771072549915" duration="10203000" />
+      <workItem from="1771072549915" duration="16416000" />
     </task>
     <servers />
   </component>

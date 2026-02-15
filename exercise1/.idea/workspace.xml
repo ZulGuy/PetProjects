@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b2233e7a-410c-46c4-9d62-17a31262a908" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/boxing/AutoBoxingUnboxing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/boxing/AutoBoxingUnboxing.java" afterDir="false" />
-    </list>
+    <list default="true" id="b2233e7a-410c-46c4-9d62-17a31262a908" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,59 +30,59 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ArithmeticOperator.executor": "Run",
-    "Application.Array.executor": "Run",
-    "Application.AssignmentOperator.executor": "Run",
-    "Application.AutoBoxingUnboxing.executor": "Run",
-    "Application.BasicInput.executor": "Run",
-    "Application.BasicOutput.executor": "Run",
-    "Application.BitwiseBitshiftOperator.executor": "Run",
-    "Application.BreakStatement.executor": "Run",
-    "Application.CharExample.executor": "Run",
-    "Application.ConditionalOperator.executor": "Run",
-    "Application.ContinueStatement.executor": "Run",
-    "Application.DataType.executor": "Run",
-    "Application.DoWhileLoop.executor": "Run",
-    "Application.EqualityRelationalOperator.executor": "Run",
-    "Application.ForEachLoop.executor": "Run",
-    "Application.ForLoop.executor": "Run",
-    "Application.IfElseStatement.executor": "Run",
-    "Application.IfLadderNestedIfStatement.executor": "Run",
-    "Application.InfiniteLoop.executor": "Run",
-    "Application.JavaComments.executor": "Run",
-    "Application.JavaNumbers.executor": "Run",
-    "Application.LabeledLoops.executor": "Run",
-    "Application.MethodExample.executor": "Run",
-    "Application.MethodOverloading.executor": "Run",
-    "Application.MultiDimensionalArrays.executor": "Run",
-    "Application.OperatorPrecedence.executor": "Run",
-    "Application.ReturnStatement.executor": "Run",
-    "Application.SearchingInArrays.executor": "Run",
-    "Application.SortingArray.executor": "Run",
-    "Application.SwitchCaseStatement.executor": "Run",
-    "Application.TernaryOperator.executor": "Run",
-    "Application.TypeCasting.executor": "Run",
-    "Application.UnaryOperator.executor": "Run",
-    "Application.VarArgsExample.executor": "Run",
-    "Application.Variables.executor": "Run",
-    "Application.WhileLoop.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Repository/PetProjects/exercise1",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ArithmeticOperator.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Array.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AssignmentOperator.executor&quot;: &quot;Run&quot;,
+    &quot;Application.AutoBoxingUnboxing.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BasicInput.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BasicOutput.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BitwiseBitshiftOperator.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BreakStatement.executor&quot;: &quot;Run&quot;,
+    &quot;Application.CharExample.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ConditionalOperator.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ContinueStatement.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DataType.executor&quot;: &quot;Run&quot;,
+    &quot;Application.DoWhileLoop.executor&quot;: &quot;Run&quot;,
+    &quot;Application.EqualityRelationalOperator.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ForEachLoop.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ForLoop.executor&quot;: &quot;Run&quot;,
+    &quot;Application.IfElseStatement.executor&quot;: &quot;Run&quot;,
+    &quot;Application.IfLadderNestedIfStatement.executor&quot;: &quot;Run&quot;,
+    &quot;Application.InfiniteLoop.executor&quot;: &quot;Run&quot;,
+    &quot;Application.JavaComments.executor&quot;: &quot;Run&quot;,
+    &quot;Application.JavaNumbers.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LabeledLoops.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MethodExample.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MethodOverloading.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MultiDimensionalArrays.executor&quot;: &quot;Run&quot;,
+    &quot;Application.OperatorPrecedence.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ReturnStatement.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SearchingInArrays.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SortingArray.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SwitchCaseStatement.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TernaryOperator.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TypeCasting.executor&quot;: &quot;Run&quot;,
+    &quot;Application.UnaryOperator.executor&quot;: &quot;Run&quot;,
+    &quot;Application.VarArgsExample.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Variables.executor&quot;: &quot;Run&quot;,
+    &quot;Application.WhileLoop.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Repository/PetProjects/exercise1&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -118,7 +116,8 @@
       <workItem from="1771005229511" duration="1879000" />
       <workItem from="1771072402277" duration="145000" />
       <workItem from="1771077357525" duration="24000" />
-      <workItem from="1771102720948" duration="1789000" />
+      <workItem from="1771102720948" duration="3234000" />
+      <workItem from="1771155640831" duration="191000" />
     </task>
     <servers />
   </component>

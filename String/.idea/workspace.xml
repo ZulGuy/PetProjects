@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc6c9da5-7a96-468c-bf18-541581b10863" name="Changes" comment="" />
+    <list default="true" id="cc6c9da5-7a96-468c-bf18-541581b10863" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/stringclassexample/ReverseString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/stringclassexample/ReverseString.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,7 +36,11 @@
   "keyToString": {
     "Application.EqualityOfStrings.executor": "Run",
     "Application.ImmutabilityOfStrings.executor": "Run",
+    "Application.ReverseString.executor": "Run",
+    "Application.StringBufferExample.executor": "Run",
+    "Application.StringBuilderExample.executor": "Run",
     "Application.StringExample.executor": "Run",
+    "Application.UsefulMethodsOfString.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -63,7 +69,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1771155833605</updated>
-      <workItem from="1771155834788" duration="3592000" />
+      <workItem from="1771155834788" duration="8502000" />
     </task>
     <servers />
   </component>

@@ -1,5 +1,7 @@
 package stringclassexample;
 
+import java.util.Collections;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class ReverseString {

@@ -37,6 +37,7 @@
     "Application.ConversionBetweenListArray.executor": "Run",
     "Application.IteratorListIteratorExamples.executor": "Run",
     "Application.SearchingInLists.executor": "Run",
+    "Application.SetInterfaceExample.executor": "Run",
     "Application.SortingArrayList.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -67,7 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1771182051098</updated>
       <workItem from="1771182052216" duration="9086000" />
-      <workItem from="1771222621972" duration="3971000" />
+      <workItem from="1771222621972" duration="6927000" />
     </task>
     <servers />
   </component>

@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b0a6a15-917c-4c81-ac02-5b7172de7bc5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../String/src/main/java/stringclassexample/ReverseString.java" beforeDir="false" afterPath="$PROJECT_DIR$/../String/src/main/java/stringclassexample/ReverseString.java" afterDir="false" />
-    </list>
+    <list default="true" id="5b0a6a15-917c-4c81-ac02-5b7172de7bc5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,9 +20,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="39ibt4kk5ebK1gS0lTzxc9WVqbd" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -37,6 +35,8 @@
     "Application.ArrayListExamples.executor": "Run",
     "Application.ComparatorExample.executor": "Run",
     "Application.ConversionBetweenListArray.executor": "Run",
+    "Application.IteratorListIteratorExamples.executor": "Run",
+    "Application.SearchingInLists.executor": "Run",
     "Application.SortingArrayList.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -66,7 +66,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1771182051098</updated>
-      <workItem from="1771182052216" duration="8277000" />
+      <workItem from="1771182052216" duration="9086000" />
+      <workItem from="1771222621972" duration="3971000" />
     </task>
     <servers />
   </component>

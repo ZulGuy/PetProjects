@@ -1,5 +1,6 @@
 package mapinterface;
 
+import java.io.Closeable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;

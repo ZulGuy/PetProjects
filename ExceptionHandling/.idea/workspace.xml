@@ -34,6 +34,8 @@
   "keyToString": {
     "Application.ExceptionHandling.executor": "Run",
     "Application.ThrowException.executor": "Run",
+    "Application.ThrowableMethods.executor": "Run",
+    "Application.ThrowsException.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -64,7 +66,7 @@
       <updated>1771357560788</updated>
       <workItem from="1771357561997" duration="1312000" />
       <workItem from="1771428757354" duration="2039000" />
-      <workItem from="1771510182476" duration="594000" />
+      <workItem from="1771510182476" duration="3310000" />
     </task>
     <servers />
   </component>

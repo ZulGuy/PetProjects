@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a2720fc-26c0-484f-aef8-550fa5ef0f8d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../MapInterface/src/main/java/mapinterface/MapInterfaceExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/../MapInterface/src/main/java/mapinterface/MapInterfaceExample.java" afterDir="false" />
-    </list>
+    <list default="true" id="4a2720fc-26c0-484f-aef8-550fa5ef0f8d" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,9 +20,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="39oLcomm50WerdXHA5ONXJnZa2Q" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -35,6 +33,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.ExceptionHandling.executor": "Run",
+    "Application.ThrowException.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -63,7 +62,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1771357560788</updated>
-      <workItem from="1771357561997" duration="994000" />
+      <workItem from="1771357561997" duration="1312000" />
+      <workItem from="1771428757354" duration="2039000" />
+      <workItem from="1771510182476" duration="594000" />
     </task>
     <servers />
   </component>

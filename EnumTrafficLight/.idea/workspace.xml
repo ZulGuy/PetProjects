@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="77187048-bcd4-4d90-912d-7b00ec4f711a" name="Changes" comment="" />
+    <list default="true" id="f131997c-a0b3-437b-bb13-48bb709c4aeb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/trafficlight/TrafficLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trafficlight/TrafficLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trafficlight/TrafficLightTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trafficlight/TrafficLightTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,7 +16,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Exception" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -22,9 +25,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
+  "associatedIndex": 7
 }]]></component>
-  <component name="ProjectId" id="39u9KESOhMcz2jyr0iubqqfMpQL" />
+  <component name="ProjectId" id="39uD8s7ANRdqwuHxuQhlCgoxbZA" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -33,7 +36,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.Test.executor": "Run",
+    "Application.TrafficLightTest.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -57,12 +60,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="77187048-bcd4-4d90-912d-7b00ec4f711a" name="Changes" comment="" />
-      <created>1771535024104</created>
+      <changelist id="f131997c-a0b3-437b-bb13-48bb709c4aeb" name="Changes" comment="" />
+      <created>1771536908096</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1771535024104</updated>
-      <workItem from="1771535025454" duration="1317000" />
+      <updated>1771536908096</updated>
+      <workItem from="1771536909212" duration="330000" />
     </task>
     <servers />
   </component>

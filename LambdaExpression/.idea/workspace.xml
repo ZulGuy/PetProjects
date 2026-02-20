@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08313e12-fc8d-4891-9846-e4f3cd4d8782" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/lambdaexpression/Animals.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lambdaexpression/Animals.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lambdaexpression/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lambdaexpression/MainTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +35,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.MainTest.executor": "Run",
+    "Application.MethodReferenceExample.executor": "Run",
+    "Application.PredicateInterfaceExample.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -64,7 +66,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1771574495791</updated>
-      <workItem from="1771574497314" duration="1146000" />
+      <workItem from="1771574497314" duration="10754000" />
     </task>
     <servers />
   </component>

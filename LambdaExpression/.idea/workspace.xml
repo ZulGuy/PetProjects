@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="08313e12-fc8d-4891-9846-e4f3cd4d8782" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/lambdaexpression/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lambdaexpression/MainTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lambdaexpression/MethodReferenceExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lambdaexpression/MethodReferenceExample.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +24,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="39vRKND7rPyWPn5JG4W2CGG0YdV" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -33,24 +34,24 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.MainTest.executor": "Run",
-    "Application.MethodReferenceExample.executor": "Run",
-    "Application.PredicateInterfaceExample.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.MainTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MethodReferenceExample.executor&quot;: &quot;Run&quot;,
+    &quot;Application.PredicateInterfaceExample.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -66,7 +67,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1771574495791</updated>
-      <workItem from="1771574497314" duration="10754000" />
+      <workItem from="1771574497314" duration="10792000" />
+      <workItem from="1771670944411" duration="1798000" />
     </task>
     <servers />
   </component>

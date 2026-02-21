@@ -18,8 +18,12 @@ public class MainTest {
 //    Animals animal = (a, s) -> {
 //      System.out.println("A " + a + " can reach speed of " + s + " kilometers per hour");
 //    };
-    Animals animal = (a,s) -> System.out.println("A " + a + " can reach speed of " + s + " kilometers per hour");
+    Animals animal = MainTest::display;
     animal.show("Cheetah", 90);
+  }
+
+  public static void display(String animal, int speed) {
+    System.out.println("A " + animal + " can reach speed of " + speed + " kilometers per hour");
   }
 
 }

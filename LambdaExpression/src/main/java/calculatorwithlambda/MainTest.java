@@ -1,6 +1,8 @@
 package calculatorwithlambda;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class MainTest {
 
@@ -26,6 +28,8 @@ public class MainTest {
     });
 
     scanner.close();
+//    ArrayList<String> list = new ArrayList<>();
+//    Stream.of(list).forEach(System.out::println);
 
   }
 

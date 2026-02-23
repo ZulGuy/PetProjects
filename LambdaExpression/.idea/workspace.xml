@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08313e12-fc8d-4891-9846-e4f3cd4d8782" name="Changes" comment="" />
+    <list default="true" id="08313e12-fc8d-4891-9846-e4f3cd4d8782" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/calculatorwithlambda/MainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/calculatorwithlambda/MainTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,7 +68,8 @@
       <updated>1771574495791</updated>
       <workItem from="1771574497314" duration="10792000" />
       <workItem from="1771670944411" duration="2896000" />
-      <workItem from="1771788048352" duration="703000" />
+      <workItem from="1771788048352" duration="996000" />
+      <workItem from="1771870573491" duration="360000" />
     </task>
     <servers />
   </component>

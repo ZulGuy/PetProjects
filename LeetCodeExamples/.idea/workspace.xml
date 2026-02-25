@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12848b95-e6ad-4309-8fb8-897dd60fd758" name="Changes" comment="" />
+    <list default="true" id="ac9801d8-9b1f-43e3-aaac-819e3d3fc196" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,10 +20,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 0
-}</component>
-  <component name="ProjectId" id="3A58BK71iD9Zf5uNjn47fFnj9pa" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="3AAZHsSTXwSpBrrO463uGzH6YtO" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -32,10 +32,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.ParallelStreamExamples.executor": "Run",
-    "Application.ReductionOperationsWithCollect.executor": "Run",
-    "Application.ReductionOperationsWithReduce.executor": "Run",
-    "Application.StreamExamples.executor": "Run",
+    "Application.SortByBits.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -59,15 +56,12 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="12848b95-e6ad-4309-8fb8-897dd60fd758" name="Changes" comment="" />
-      <created>1771870935156</created>
+      <changelist id="ac9801d8-9b1f-43e3-aaac-819e3d3fc196" name="Changes" comment="" />
+      <created>1772037252409</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1771870935156</updated>
-      <workItem from="1771870936313" duration="2756000" />
-      <workItem from="1771937056742" duration="2730000" />
-      <workItem from="1771961989866" duration="3158000" />
-      <workItem from="1772034570279" duration="2081000" />
+      <updated>1772037252409</updated>
+      <workItem from="1772037253565" duration="3322000" />
     </task>
     <servers />
   </component>

@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="12848b95-e6ad-4309-8fb8-897dd60fd758" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/streamexamples/ReductionOperationsWithCollect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/streamexamples/ReductionOperationsWithCollect.java" afterDir="false" />
-    </list>
+    <list default="true" id="12848b95-e6ad-4309-8fb8-897dd60fd758" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +32,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.ParallelStreamExamples.executor": "Run",
     "Application.ReductionOperationsWithCollect.executor": "Run",
     "Application.ReductionOperationsWithReduce.executor": "Run",
     "Application.StreamExamples.executor": "Run",
@@ -67,7 +66,8 @@
       <updated>1771870935156</updated>
       <workItem from="1771870936313" duration="2756000" />
       <workItem from="1771937056742" duration="2730000" />
-      <workItem from="1771961989866" duration="2525000" />
+      <workItem from="1771961989866" duration="3158000" />
+      <workItem from="1772034570279" duration="1433000" />
     </task>
     <servers />
   </component>

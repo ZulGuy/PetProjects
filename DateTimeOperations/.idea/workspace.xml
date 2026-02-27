@@ -33,6 +33,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.CalendarClassExample.executor": "Run",
+    "Application.LocalDateExamples.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -61,7 +62,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1772193871494</updated>
-      <workItem from="1772193873035" duration="3926000" />
+      <workItem from="1772193873035" duration="6300000" />
     </task>
     <servers />
   </component>

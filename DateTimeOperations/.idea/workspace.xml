@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2be03058-6e5f-4026-86d8-1273b90c20a7" name="Changes" comment="" />
+    <list default="true" id="2be03058-6e5f-4026-86d8-1273b90c20a7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/datetimeexamples/LocalTimeExamples.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/datetimeexamples/LocalTimeExamples.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +36,7 @@
   &quot;keyToString&quot;: {
     &quot;Application.CalendarClassExample.executor&quot;: &quot;Run&quot;,
     &quot;Application.LocalDateExamples.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LocalTimeExamples.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -63,7 +66,8 @@
       <option name="presentableId" value="Default" />
       <updated>1772193871494</updated>
       <workItem from="1772193873035" duration="6945000" />
-      <workItem from="1772268221148" duration="631000" />
+      <workItem from="1772268221148" duration="871000" />
+      <workItem from="1772392717783" duration="717000" />
     </task>
     <servers />
   </component>

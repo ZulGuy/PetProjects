@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed64f8e6-fcc1-499a-9567-ea842103015b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/example.txt" beforeDir="false" afterPath="$PROJECT_DIR$/example.txt" afterDir="false" />
-    </list>
+    <list default="true" id="ed64f8e6-fcc1-499a-9567-ea842103015b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +34,7 @@
   "keyToString": {
     "Application.InputStreamExample.executor": "Run",
     "Application.OutputStreamExample.executor": "Run",
+    "Application.WriterExample.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -71,7 +70,7 @@
       <updated>1772661144745</updated>
       <workItem from="1772661145923" duration="783000" />
       <workItem from="1772661986404" duration="34000" />
-      <workItem from="1772737880490" duration="2319000" />
+      <workItem from="1772737880490" duration="3757000" />
     </task>
     <servers />
   </component>

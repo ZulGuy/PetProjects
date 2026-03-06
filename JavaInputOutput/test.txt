@@ -1,1 +1,1 @@
-Writer
+This text was written using the Writer Class.

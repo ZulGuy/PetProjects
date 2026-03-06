@@ -14,26 +14,39 @@ public class ReaderExample {
       System.out.print("Reading data... ");
 
       int characterRead;
+//      char[] charArray = new char[6];
+      String text = "";
 
       if (reader.ready()) {
+
+//        reader.skip(32);
 
         do {
 
           characterRead = reader.read();
+//          characterRead = reader.read(charArray, 0, 6);
 
           if(characterRead != -1) {
-            System.out.print((char) characterRead);
-            Thread.sleep(300L);
+            text = text.concat(String.valueOf((char)characterRead));
+
+//            String charString = new String(charArray);
+//            System.out.println(charString);
+
+//            System.out.print((char) characterRead);
+//            Thread.sleep(300L);
           }
 
         } while (characterRead != -1);
 
       }
 
+      int index = text.indexOf("Writer");
+      System.out.println(text.substring(index, index + 6));
+
       System.out.println();
       System.out.println("Reading completed");
 
-    } catch (IOException | InterruptedException e) {
+    } catch (IOException e) {
       e.printStackTrace();
     }
 

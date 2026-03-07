@@ -11,7 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="7" />
+    <option name="cachedIndexableFilesCount" value="15" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -56,6 +56,8 @@
     "Application.InputStreamExample.executor": "Run",
     "Application.OutputStreamExample.executor": "Run",
     "Application.ReaderExample.executor": "Run",
+    "Application.TestDeserialization.executor": "Run",
+    "Application.TestSerialization.executor": "Run",
     "Application.WriterExample.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
@@ -102,7 +104,8 @@
       <workItem from="1772806784100" duration="374000" />
       <workItem from="1772807570170" duration="67000" />
       <workItem from="1772807649883" duration="29000" />
-      <workItem from="1772881980460" duration="1860000" />
+      <workItem from="1772881980460" duration="2742000" />
+      <workItem from="1772912885932" duration="1558000" />
     </task>
     <servers />
   </component>

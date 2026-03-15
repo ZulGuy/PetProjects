@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="470138d8-c0f5-451e-ba12-fb39586a2525" name="Changes" comment="" />
+    <list default="true" id="decfbacd-ef1e-4757-a953-6d2602087440" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="2" />
+    <option name="cachedIndexableFilesCount" value="5" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -41,9 +41,9 @@
     <urls />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 0
 }</component>
-  <component name="ProjectId" id="3AifJpfU5bsMJwdboFPnCdkwe8K" />
+  <component name="ProjectId" id="3AloMMlkVNMFAfrhPuAIUCY4uIj" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -53,6 +53,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.MainTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.VolatileTest.executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -79,13 +80,13 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="470138d8-c0f5-451e-ba12-fb39586a2525" name="Changes" comment="" />
-      <created>1773080243937</created>
+      <changelist id="decfbacd-ef1e-4757-a953-6d2602087440" name="Changes" comment="" />
+      <created>1773176470137</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1773080243937</updated>
-      <workItem from="1773080245345" duration="345000" />
-      <workItem from="1773080606008" duration="6000" />
+      <updated>1773176470137</updated>
+      <workItem from="1773176471442" duration="1523000" />
+      <workItem from="1773261222860" duration="1017000" />
     </task>
     <servers />
   </component>

@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae5a6c6c-38df-4089-9d6f-49e4eb063b25" name="Changes" comment="" />
+    <list default="true" id="ae5a6c6c-38df-4089-9d6f-49e4eb063b25" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/ITSDBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/ITSDBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/JiraResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/JiraResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Reporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Reporter.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,26 +21,29 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "ZulGuy"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ZulGuy&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/ZulGuy/PetProjects.git",
-    "accountId": "00ea8aba-0730-4bc9-b408-66b80e47898d"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ZulGuy/PetProjects.git&quot;,
+    &quot;accountId&quot;: &quot;00ea8aba-0730-4bc9-b408-66b80e47898d&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="3B5JbGgf8ZgBkbIaiTogFCdrzAN" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
@@ -51,6 +58,11 @@
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/Repository/PetProjects/jira_ai",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
   }
@@ -68,8 +80,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.31033.145" />
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.32098.37" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.32098.37" />
       </set>
     </attachedChunks>
   </component>
@@ -81,6 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1773773067602</updated>
       <workItem from="1773773068690" duration="27000" />
+      <workItem from="1773776553862" duration="1856000" />
     </task>
     <servers />
   </component>

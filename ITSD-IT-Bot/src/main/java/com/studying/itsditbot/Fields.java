@@ -7,10 +7,8 @@ public record Fields(String summary, Reporter reporter, CustomField10001 customf
 
   @Override
   public String toString() {
-    return "Fields{" +
-        "summary='" + summary + '\'' +
-        ", reporter=" + reporter +
-        ", status=" + customfield_10001.currentStatus().status() +
-        '}';
+    return summary + "\n" +
+        "Reporter: " + reporter.displayName() + "\n" +
+        customfield_10001.currentStatus().status() + ";\n";
   }
 }

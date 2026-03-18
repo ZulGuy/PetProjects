@@ -7,9 +7,6 @@ public record Issue(String key, Fields fields) {
 
   @Override
   public String toString() {
-    return "Issue{" +
-        "key='" + key + '\'' +
-        ", fields=" + fields.toString() +
-        '}';
+    return "\n" + key + "\n" + fields.toString();
   }
 }

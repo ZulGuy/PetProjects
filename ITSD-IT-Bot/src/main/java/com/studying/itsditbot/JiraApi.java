@@ -2,11 +2,12 @@ package com.studying.itsditbot;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClient;
 
 public class JiraApi {
 
-  private final String URL = "https://sd.kernel.ua";
+  private final String URL = "https://sd.kernel.ua/rest/api/2/";
   private final String AUTH;
   private RestClient restClient;
 
@@ -21,9 +22,20 @@ public class JiraApi {
 
   public JiraResponse getIssues() {
     return restClient.get()
-        .uri("/issues/?jql=project = ITSD AND status in (Open, \"In Progress\", Reopened, \"Waiting for support\", Pending, Escalated, \"Waiting for approval\", \"Work in progress\", \"Awaiting CAB approval\", Planning, Implementing, \"Under investigation\", \"Under review\", Assigned, \"Assigned to group\", \"Ожидание выполнения\", \"In Progress contractor\", \"Transferred to contractor\", \"Awaiting fin CAB\", \"Cmdb owner approval\") AND assignee in (currentUser()) ORDER BY created DESC, \"Time to resolution\" ASC")
+        .uri("search/?jql=project = ITSD AND status in (Open, \"In Progress\", Reopened, \"Waiting for support\", Pending, Escalated, \"Waiting for approval\", \"Work in progress\", \"Awaiting CAB approval\", Planning, Implementing, \"Under investigation\", \"Under review\", Assigned, \"Assigned to group\", \"Ожидание выполнения\", \"In Progress contractor\", \"Transferred to contractor\", \"Awaiting fin CAB\", \"Cmdb owner approval\") AND assignee in (currentUser()) ORDER BY created DESC, \"Time to resolution\" ASC")
         .retrieve()
         .body(JiraResponse.class);
+  }
+
+  public boolean isAuth() {
+    ResponseEntity<String> entity = restClient.get()
+        .uri("myself")
+        .retrieve()
+        .toEntity(String.class);
+    if(entity.getStatusCode().is2xxSuccessful()) {
+      return true;
+    }
+    return false;
   }
 
 }

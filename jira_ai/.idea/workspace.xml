@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae5a6c6c-38df-4089-9d6f-49e4eb063b25" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/ITSDBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/ITSDBot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Fields.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Fields.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Issue.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Issue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/JiraApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/JiraApi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/JiraResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/JiraResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Reporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Reporter.java" afterDir="false" />
     </list>
@@ -63,6 +65,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "show.migrate.to.gradle.popup": "false",
     "vue.rearranger.settings.migration": "true"
   }
@@ -94,6 +97,7 @@
       <updated>1773773067602</updated>
       <workItem from="1773773068690" duration="27000" />
       <workItem from="1773776553862" duration="1856000" />
+      <workItem from="1773835367112" duration="798000" />
     </task>
     <servers />
   </component>

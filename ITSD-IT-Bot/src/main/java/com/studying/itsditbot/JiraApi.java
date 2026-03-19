@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException.Forbidden;
+import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 import org.springframework.web.client.RestClient;
 
 public class JiraApi {
@@ -62,17 +64,18 @@ public class JiraApi {
 
       return true;
 
-    } catch (org.springframework.web.client.HttpClientErrorException.Unauthorized e) {
+    } catch (Unauthorized e) {
       // 401 — неправильний логін/пароль
+      System.out.println("401 Unauthorized, неправильний логін/пароль");
       return false;
 
-    } catch (org.springframework.web.client.HttpClientErrorException.Forbidden e) {
+    } catch (Forbidden e) {
       // 403 — доступ заборонено (але auth МОЖЕ бути валідний!)
       System.out.println("403 Forbidden, але це не обов'язково неправильний пароль");
-      return true; // 🔥 важливий момент!
+      return false; // 🔥 важливий момент!
 
     } catch (Exception e) {
-      // інші помилки — логуй, але не вважай auth failed
+      // інші помилки — логуються, але не вважається, що auth failed
       e.printStackTrace();
       return true;
     }

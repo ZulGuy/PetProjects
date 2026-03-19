@@ -35,7 +35,9 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
   private JiraApi api;
   private Map<Long, AuthStatus> authStatusHashMap = new ConcurrentHashMap<>();
   private Map<Long, String> userLoginsHashMap = new ConcurrentHashMap<>();
+  private Map<Long, ResolutionStatus> resolutionStatusHashMap = new ConcurrentHashMap<>();
   private final String BOT_TOKEN;
+  private String currentIssue;
 
   public ITSDBot(@Value("${telegram.bot.token}") String botToken) {
     BOT_TOKEN = botToken;
@@ -149,10 +151,82 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
             .builder()
             .chatId(chatId)
             .text(messageText)
-            .replyMarkup(setKeyboard())
+            .replyMarkup(setKeyboard(issues))
             .build();
         try {
           telegramClient.execute(message); // Sending our message object to user
+        } catch (TelegramApiException e) {
+          e.printStackTrace();
+        }
+      } else if (authStatusHashMap.get(update.getMessage().getChatId())
+          == AuthStatus.AUTHORIZED && update.getMessage().getText().matches("^ITSD-\\d+$")) {
+        chatId = update.getMessage().getChatId();
+        String issueKey = update.getMessage().getText();
+        JiraResponse response = api.getIssues();
+        List<Issue> issues = List.of(response.issues());
+        List<String> keys = new ArrayList<>();
+        issues.forEach(issue -> keys.add(issue.key()));
+        if(!keys.contains(issueKey)) {
+          SendMessage message = SendMessage // Create a message object
+              .builder()
+              .chatId(chatId)
+              .text("Такого запиту не існує. Будь ласка, оберіть інший зі списку")
+              .replyMarkup(setKeyboard())
+              .build();
+        }
+
+        SendMessage message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Обрано запит " + issueKey)
+            .replyMarkup(setKeyboard(issueKey))
+            .build();
+        currentIssue = issueKey;
+
+        try {
+          telegramClient.execute(message);
+        } catch (TelegramApiException e) {
+          e.printStackTrace();
+        }
+      } else if (authStatusHashMap.get(update.getMessage().getChatId())
+          == AuthStatus.AUTHORIZED && update.getMessage().getText().equals("✅ Вирішити запит")) {
+
+        SendMessage message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, напишіть коментар до запиту")
+            .build();
+
+        resolutionStatusHashMap.put(update.getMessage().getChatId(), ResolutionStatus.WAITING_COMMENT);
+        try {
+          telegramClient.execute(message);
+        } catch (TelegramApiException e) {
+          e.printStackTrace();
+        }
+      } else if (authStatusHashMap.get(update.getMessage().getChatId())
+          == AuthStatus.AUTHORIZED && resolutionStatusHashMap.get(update.getMessage().getChatId())
+          == ResolutionStatus.WAITING_COMMENT) {
+        boolean isResolved = api.resolveIssue(currentIssue, update.getMessage().getText());
+        SendMessage message;
+        if(isResolved) {
+          message = SendMessage
+              .builder()
+              .chatId(chatId)
+              .text("Запит " + currentIssue + " вирішено")
+              .replyMarkup(setKeyboard())
+              .build();
+        } else {
+          message = SendMessage
+              .builder()
+              .chatId(chatId)
+              .text("Виникла помилка при вирішенні запиту " + currentIssue)
+              .replyMarkup(setKeyboard())
+              .build();
+        }
+
+        resolutionStatusHashMap.replace(update.getMessage().getChatId(), ResolutionStatus.NONE);
+        try {
+          telegramClient.execute(message);
         } catch (TelegramApiException e) {
           e.printStackTrace();
         }
@@ -180,6 +254,34 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
     List<KeyboardRow> keyboardRows = new ArrayList<>();
     KeyboardRow row = new KeyboardRow();
     row.add("📋 Мої запити");
+    keyboardRows.add(row);
+    ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(keyboardRows);
+    keyboardMarkup.setResizeKeyboard(true);
+    return keyboardMarkup;
+  }
+
+  public static ReplyKeyboardMarkup setKeyboard(Issue[] issues) {
+    List<KeyboardRow> keyboardRows = new ArrayList<>();
+    KeyboardRow row = new KeyboardRow();
+    for (Issue issue : issues) {
+      if(row.size() < 3)
+        row.add(issue.key());
+      else {
+        keyboardRows.add(row);
+        row = new KeyboardRow();
+        row.add(issue.key());
+      }
+    }
+    keyboardRows.add(row);
+    ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(keyboardRows);
+    keyboardMarkup.setResizeKeyboard(true);
+    return keyboardMarkup;
+  }
+
+  public static ReplyKeyboardMarkup setKeyboard(String issueKey) {
+    List<KeyboardRow> keyboardRows = new ArrayList<>();
+    KeyboardRow row = new KeyboardRow();
+    row.add("✅ Вирішити запит");
     keyboardRows.add(row);
     ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(keyboardRows);
     keyboardMarkup.setResizeKeyboard(true);

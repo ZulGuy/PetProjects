@@ -1,8 +1,8 @@
-package com.studying.itsditbot;
+package com.studying.itsditbot.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record JiraResponse(Issue[] issues) {
+public record Reporter(String displayName) {
 
 }

@@ -1,5 +1,9 @@
 package com.studying.itsditbot;
 
+import com.studying.itsditbot.dto.Issue;
+import com.studying.itsditbot.dto.JiraResponse;
+import com.studying.itsditbot.enums.AuthStatus;
+import com.studying.itsditbot.enums.ResolutionStatus;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -201,6 +205,18 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
 
         resolutionStatusHashMap.replace(chatId, ResolutionStatus.NONE);
 
+      } else if (authStatusHashMap.get(chatId) == AuthStatus.AUTHORIZED
+          && messageText.equals("\uD83D\uDE04 Отримати оновлення")) {
+        String issuesText = sendUpdates(apiHashMap.get(chatId), chatId, message);
+        if (issuesText.equals("") || issuesText.isBlank() || issuesText.isEmpty())
+          issuesText = "Відсутні оновлення по запитам";
+
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text(issuesText)
+            .replyMarkup(setKeyboard())
+            .build();
       }
 
       try {
@@ -234,6 +250,7 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
     List<KeyboardRow> keyboardRows = new ArrayList<>();
     KeyboardRow row = new KeyboardRow();
     row.add("📋 Мої запити");
+    row.add("\uD83D\uDE04 Отримати оновлення");
     keyboardRows.add(row);
     ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(keyboardRows);
     keyboardMarkup.setResizeKeyboard(true);
@@ -243,6 +260,10 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
   public static ReplyKeyboardMarkup setKeyboard(Issue[] issues) {
     List<KeyboardRow> keyboardRows = new ArrayList<>();
     KeyboardRow row = new KeyboardRow();
+    row.add("📋 Мої запити");
+    row.add("\uD83D\uDE04 Отримати оновлення");
+    keyboardRows.add(row);
+    row = new KeyboardRow();
 
     for (Issue issue : issues) {
 
@@ -265,10 +286,24 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
   public static ReplyKeyboardMarkup setKeyboard(String issueKey) {
     List<KeyboardRow> keyboardRows = new ArrayList<>();
     KeyboardRow row = new KeyboardRow();
+    row.add("📋 Мої запити");
+    row.add("\uD83D\uDE04 Отримати оновлення");
     row.add("✅ Вирішити запит");
     keyboardRows.add(row);
     ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(keyboardRows);
     keyboardMarkup.setResizeKeyboard(true);
     return keyboardMarkup;
+  }
+
+  public String sendUpdates(JiraApi api, long chatId, SendMessage message) {
+
+    Issue[] issues = api.getIssuesScheduled();
+    StringBuffer sb = new StringBuffer();
+
+    for (Issue issue : issues) {
+      sb.append(issue.toString());
+    }
+
+    return sb.toString();
   }
 }

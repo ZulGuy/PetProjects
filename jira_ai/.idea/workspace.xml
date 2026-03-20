@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ae5a6c6c-38df-4089-9d6f-49e4eb063b25" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Fields.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Fields.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Issue.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Issue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/ITSDBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/ITSDBot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/JiraApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/JiraApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/JiraResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/JiraResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Reporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ITSD-IT-Bot/src/main/java/com/studying/itsditbot/Reporter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,27 +47,27 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Repository/PetProjects/jira_ai",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "show.migrate.to.gradle.popup": "false",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Repository/PetProjects/jira_ai&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="JiraAiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -98,6 +96,7 @@
       <workItem from="1773773068690" duration="27000" />
       <workItem from="1773776553862" duration="1856000" />
       <workItem from="1773835367112" duration="798000" />
+      <workItem from="1773991615244" duration="2885000" />
     </task>
     <servers />
   </component>

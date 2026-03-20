@@ -1,4 +1,4 @@
-package com.studying.itsditbot;
+package com.studying.itsditbot.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

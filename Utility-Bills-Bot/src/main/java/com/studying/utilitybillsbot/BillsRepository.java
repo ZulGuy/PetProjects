@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface BillsRepository extends JpaRepository<Bill, Integer> {
 
   Optional<List<Bill>> findByChatId(long chatId);
-  Optional<Bill> findByMonthAndYear(int month, int year);
+  Optional<Bill> findByMonthAndYearAndChatId(int month, int year, long chatId);
 
 }

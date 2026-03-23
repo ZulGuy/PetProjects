@@ -77,8 +77,8 @@ public class UtilityBillsBot implements SpringLongPollingBot,
         usersService.save(currentUser);
       }
       try {
-        currentBill = billsService.findByMonthAndYear(LocalDate.now().getMonthValue(),
-            LocalDate.now().getYear());
+        currentBill = billsService.findByMonthAndYearAndChatId(LocalDate.now().getMonthValue(),
+            LocalDate.now().getYear(), chatId);
       } catch (EntityNotFoundException e) {
         currentBill = new Bill(chatId);
         billsService.save(currentBill);
@@ -103,7 +103,20 @@ public class UtilityBillsBot implements SpringLongPollingBot,
           .text("Виникла помилка!!!")
           .build();
 
-      if (messageText.equals("Внести показники на початку місяця")
+      if (messageText.equals("/start")) {
+        currentUser.setStatus(Status.WAITING_FIRST_DAY_OF_MONTH);
+        currentUser.setBillsStatus(BillsStatus.WAITING_ELECTRICITY);
+        currentUser.setRatesStatus(RatesStatus.NONE);
+        usersService.save(currentUser);
+
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .replyMarkup(setKeyboard())
+            .text("Будь ласка, натисніть 'Внести показники на початку місяця'")
+            .build();
+
+      } else if (messageText.equals("Внести показники на початку місяця")
           && currentUser.getStatus() == Status.NONE) {
 
         currentUser.setStatus(Status.WAITING_FIRST_DAY_OF_MONTH);
@@ -354,9 +367,25 @@ public class UtilityBillsBot implements SpringLongPollingBot,
 
       } else if (currentUser.getStatus() == Status.WAITING_LAST_DAY_OF_MONTH
           && currentUser.getBillsStatus() == BillsStatus.WAITING_GAS) {
+        try{
+          currentBill.setGas(Integer.parseInt(messageText.trim()) - currentBill.getGas());
+        } catch (Exception e) {
+          currentBill.setGas(previousBills.get(chatId).getGas());
+          message = SendMessage
+              .builder()
+              .chatId(chatId)
+              .replyMarkup(setStandardKeyboard())
+              .text("Будь ласка, внесіть показники газу в кінці місяця")
+              .build();
+          try {
+            telegramClient.executeAsync(message);
+          } catch (TelegramApiException er) {
+            er.printStackTrace();
+          }
+          return;
+        }
         currentUser.setBillsStatus(BillsStatus.NONE);
         currentUser.setStatus(Status.COMPLETED_LAST_DAY_OF_MONTH);
-        currentBill.setGas(Integer.parseInt(messageText.trim()) - currentBill.getGas());
         billsService.save(currentBill);
         usersService.save(currentUser);
 
@@ -367,6 +396,55 @@ public class UtilityBillsBot implements SpringLongPollingBot,
             .text(
                 "Чи змінились тарифи на комуналку? (Оберіть на клавіатурі бота 'Так', 'Ні' або 'Ввести тарифи вперше')")
             .build();
+
+      } else if(currentUser.getStatus() == Status.COMPLETED_LAST_DAY_OF_MONTH
+          && messageText.equals("Ні")) {
+        if (ratesService.findByChatId(chatId) != null && ratesService.findByChatId(chatId).getGasRate() != 0) {
+          try {
+            currentRate.setGasRate(Double.parseDouble(messageText.trim()));
+            currentUser.setRatesStatus(RatesStatus.COMPLETED);
+            ratesService.save(currentRate);
+            usersService.save(currentUser);
+            billsService.calculateTotalCost(chatId);
+            currentBill = billsService.findByMonthAndYearAndChatId(LocalDate.now().getMonthValue(), LocalDate.now().getYear(), chatId);
+            ratesService.save(currentRate);
+            usersService.save(currentUser);
+
+            message = SendMessage
+                .builder()
+                .chatId(chatId)
+                .replyMarkup(setKeyboard())
+                .text("Рахунок за комунальні послуги за " + LocalDate.now() + ":" + "\n"
+                    + "Електроенергія: " + currentBill.getElectricityCost() + "грн" + "\n"
+                    + "Холодна вода: " + currentBill.getColdWaterCost() + "грн" + "\n"
+                    + "Гаряча вода: " + currentBill.getHotWaterCost() + "грн" + "\n"
+                    + "Газ: " + currentBill.getGasCost() + "грн" + "\n"
+                    + "Загальна сума: " + currentBill.getTotalCost() + "грн")
+                .build();
+
+            currentUser.setStatus(Status.WAITING_FIRST_DAY_OF_MONTH);
+            currentUser.setBillsStatus(BillsStatus.WAITING_ELECTRICITY);
+            currentUser.setRatesStatus(RatesStatus.NONE);
+            usersService.save(currentUser);
+
+          } catch (NumberFormatException e) {
+            message = SendMessage
+                .builder()
+                .chatId(chatId)
+                .replyMarkup(setKeyboard())
+                .text("Будь ласка, введіть число у форматі 1234.56")
+                .build();
+          }
+          return;
+        }
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .replyMarkup(setKeyboardForRate())
+            .text(
+                "Тарифів не знайдено, прошу натиснути 'Ввести тарифи вперше'")
+            .build();
+        return;
 
       } else if (currentUser.getStatus() == Status.COMPLETED_LAST_DAY_OF_MONTH
           && (messageText.equals("Ввести тарифи вперше") || messageText.equals("Так"))) {
@@ -456,7 +534,10 @@ public class UtilityBillsBot implements SpringLongPollingBot,
         try {
           currentRate.setGasRate(Double.parseDouble(messageText.trim()));
           currentUser.setRatesStatus(RatesStatus.COMPLETED);
+          ratesService.save(currentRate);
+          usersService.save(currentUser);
           billsService.calculateTotalCost(chatId);
+          currentBill = billsService.findByMonthAndYearAndChatId(LocalDate.now().getMonthValue(), LocalDate.now().getYear(), chatId);
           ratesService.save(currentRate);
           usersService.save(currentUser);
 
@@ -471,6 +552,11 @@ public class UtilityBillsBot implements SpringLongPollingBot,
                   + "Газ: " + currentBill.getGasCost() + "грн" + "\n"
                   + "Загальна сума: " + currentBill.getTotalCost() + "грн")
               .build();
+
+          currentUser.setStatus(Status.WAITING_FIRST_DAY_OF_MONTH);
+          currentUser.setBillsStatus(BillsStatus.WAITING_ELECTRICITY);
+          currentUser.setRatesStatus(RatesStatus.NONE);
+          usersService.save(currentUser);
 
         } catch (NumberFormatException e) {
           message = SendMessage

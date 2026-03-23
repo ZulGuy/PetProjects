@@ -34,16 +34,34 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
   private Map<Long, String> userLoginsHashMap = new ConcurrentHashMap<>();
   private Map<Long, ResolutionStatus> resolutionStatusHashMap = new ConcurrentHashMap<>();
   private final String BOT_TOKEN;
-  private String currentIssue;
+  private Map<Long, String> currentIssueHashMap = new ConcurrentHashMap<>();
+
+  private static final String[] IT_SERVICE = {
+      "1C HR", "1C IFRS", "1С Агро",
+      "1С ДВА", "1С ККУ", "1С РТК",
+      "1С УК", "AI. Підтримка", "APS Tender",
+      "ARCGIS", "BAS Документообіг", "DAB",
+      "EDocs", "HR сервіси", "LandInvest",
+      "M.E.Doc", "MS Office 365", "Navision",
+      "RDS сервіси", "WEB-сайти", "WIALON",
+      "АСУБЗ", "Друкуюча техніка", "Звітність Пенсійного Фонду",
+      "Інформаційна безпека", "Клієнт-Банк", "КНО",
+      "Корпоративна звітність", "Корпоративна мережа", "Корпоративна пошта",
+      "Корпоративна телефонія", "Логістичні сервіси", "Підтримка ІТ Інфраструктури",
+      "Підтримка користувачів", "Робоче місце", "Сервіси ДВА",
+      "Система подачі бух. звітності та ЕСВ", "Інше"
+  };
 
   public ITSDBot(@Value("${telegram.bot.token}") String botToken) {
     BOT_TOKEN = botToken;
     telegramClient = new OkHttpTelegramClient(getBotToken());
   }
+
   @Override
   public String getBotToken() {
     return BOT_TOKEN;
   }
+
   @Override
   public LongPollingUpdateConsumer getUpdatesConsumer() {
     return this;
@@ -60,8 +78,9 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
 
       if (messageText.equals("/start")) {
 
-        if (authStatusHashMap.containsKey(chatId))
+        if (authStatusHashMap.containsKey(chatId)) {
           authStatusHashMap.replace(chatId, AuthStatus.NON_AUTHORIZED);
+        }
 
         message = SendMessage
             .builder()
@@ -125,6 +144,20 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
 
         JiraResponse jiraResponse = apiHashMap.get(chatId).getIssues();
         Issue[] issues = jiraResponse.issues();
+        if (issues.length == 0) {
+          message = SendMessage
+              .builder()
+              .chatId(chatId)
+              .text("Ваша черга запитів порожня \uD83D\uDE04")
+              .replyMarkup(setKeyboard())
+              .build();
+          try {
+            telegramClient.executeAsync(message);
+          } catch (TelegramApiException e) {
+            e.printStackTrace();
+          }
+          return;
+        }
         StringBuffer sb = new StringBuffer();
 
         for (Issue issue : issues) {
@@ -156,6 +189,12 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
               .text("Такого запиту не існує. Будь ласка, оберіть інший зі списку")
               .replyMarkup(setKeyboard())
               .build();
+          try {
+            telegramClient.executeAsync(message);
+          } catch (TelegramApiException e) {
+            e.printStackTrace();
+          }
+          return;
 
         }
 
@@ -166,7 +205,8 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
             .replyMarkup(setKeyboard(issueKey))
             .build();
 
-        currentIssue = issueKey;
+        currentIssueHashMap.putIfAbsent(chatId, issueKey);
+        currentIssueHashMap.replace(chatId, issueKey);
 
       } else if (authStatusHashMap.get(chatId) == AuthStatus.AUTHORIZED
           && messageText.equals("✅ Вирішити запит")) {
@@ -182,13 +222,35 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
       } else if (authStatusHashMap.get(chatId) == AuthStatus.AUTHORIZED
           && resolutionStatusHashMap.get(chatId) == ResolutionStatus.WAITING_COMMENT) {
 
-        boolean isResolved = apiHashMap.get(chatId).resolveIssue(currentIssue, messageText);
+        if (messageText.isBlank() || messageText.isEmpty() || messageText.equals("")
+            || messageText.length() < 10) {
+          message = SendMessage
+              .builder()
+              .chatId(chatId)
+              .text("Будь ласка, напишіть коментар що містить хоча б 10 символів")
+              .build();
+          try {
+            telegramClient.executeAsync(message);
+          } catch (TelegramApiException e) {
+            e.printStackTrace();
+          }
+          return;
+        }
+        Issue[] currentIssues = apiHashMap.get(chatId).getIssues().issues();
+        Issue currentIssue = null;
+        for (Issue issue : currentIssues) {
+          if (issue.key().equals(currentIssueHashMap.get(chatId))) {
+            currentIssue = issue;
+            break;
+          }
+        }
+        String isResolved = apiHashMap.get(chatId).resolveIssue(currentIssue, messageText);
         if (isResolved) {
 
           message = SendMessage
               .builder()
               .chatId(chatId)
-              .text("Запит " + currentIssue + " вирішено")
+              .text("Запит " + currentIssueHashMap.get(chatId) + " вирішено")
               .replyMarkup(setKeyboard())
               .build();
 
@@ -197,7 +259,7 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
           message = SendMessage
               .builder()
               .chatId(chatId)
-              .text("Виникла помилка при вирішенні запиту " + currentIssue)
+              .text("Виникла помилка при вирішенні запиту " + currentIssueHashMap.get(chatId))
               .replyMarkup(setKeyboard())
               .build();
 
@@ -208,8 +270,9 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
       } else if (authStatusHashMap.get(chatId) == AuthStatus.AUTHORIZED
           && messageText.equals("\uD83D\uDE04 Отримати оновлення")) {
         String issuesText = sendUpdates(apiHashMap.get(chatId), chatId, message);
-        if (issuesText.equals("") || issuesText.isBlank() || issuesText.isEmpty())
+        if (issuesText.equals("") || issuesText.isBlank() || issuesText.isEmpty()) {
           issuesText = "Відсутні оновлення по запитам";
+        }
 
         message = SendMessage
             .builder()
@@ -220,7 +283,7 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
       }
 
       try {
-        telegramClient.execute(message);
+        telegramClient.executeAsync(message);
       } catch (TelegramApiException e) {
         e.printStackTrace();
       }
@@ -267,9 +330,9 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
 
     for (Issue issue : issues) {
 
-      if (row.size() < 3)
+      if (row.size() < 3) {
         row.add(issue.key());
-      else {
+      } else {
         keyboardRows.add(row);
         row = new KeyboardRow();
         row.add(issue.key());
@@ -305,5 +368,30 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
     }
 
     return sb.toString();
+  }
+
+  public static ReplyKeyboardMarkup itServiceKeyboard() {
+
+    List<String> services = List.of(IT_SERVICE);
+
+    List<KeyboardRow> rows = new ArrayList<>();
+    KeyboardRow row = new KeyboardRow();
+
+    for (String service : services) {
+      if (row.size() == 2) { // по 2 кнопки в ряд
+        rows.add(row);
+        row = new KeyboardRow();
+      }
+      row.add(service);
+    }
+
+    if (!row.isEmpty()) {
+      rows.add(row);
+    }
+
+    ReplyKeyboardMarkup keyboard = new ReplyKeyboardMarkup(rows);
+    keyboard.setResizeKeyboard(true);
+
+    return keyboard;
   }
 }

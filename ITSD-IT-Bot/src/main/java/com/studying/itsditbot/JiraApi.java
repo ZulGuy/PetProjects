@@ -51,8 +51,43 @@ public class JiraApi {
         .body(JiraResponse.class);
   }
 
-  public boolean resolveIssue(String issueKey, String comment) {
-    Map<String, Object> body = Map.of(
+  public String resolveIssue(Issue currentIssue, String comment) {
+    Map<String, Object> body = null;
+    if(currentIssue.fields().customfield_10001().currentStatus().status().equals("Waiting for support")) {
+      body = Map.of(
+          "transition", Map.of("id", "981")
+      );
+      restClient.post()
+          .uri("issue/" + currentIssue.key() + "/transitions")
+          .contentType(MediaType.APPLICATION_JSON)
+          .body(body) //Spring сам конвертує Map в JSON
+          .retrieve()
+          .body(String.class);
+
+      body = Map.of(
+          "transition", Map.of("id", "971")
+      );
+      restClient.post()
+          .uri("issue/" + currentIssue.key() + "/transitions")
+          .contentType(MediaType.APPLICATION_JSON)
+          .body(body) //Spring сам конвертує Map в JSON
+          .retrieve()
+          .body(String.class);
+    }
+
+    if(currentIssue.fields().customfield_10001().currentStatus().status().equals("Assigned")) {
+      body = Map.of(
+          "transition", Map.of("id", "971")
+      );
+      restClient.post()
+          .uri("issue/" + currentIssue.key() + "/transitions")
+          .contentType(MediaType.APPLICATION_JSON)
+          .body(body) //Spring сам конвертує Map в JSON
+          .retrieve()
+          .body(String.class);
+    }
+
+    body = Map.of(
         "transition", Map.of("id", "761"),
         "update", Map.of(
             "comment", List.of(
@@ -64,12 +99,13 @@ public class JiraApi {
         )
     );
 
-    restClient.post()
-        .uri("issue/" + issueKey + "/transitions")
+    String response = restClient.post()
+        .uri("issue/" + currentIssue.key() + "/transitions")
         .contentType(MediaType.APPLICATION_JSON)
-        .body(body) // 🔥 Spring сам конвертує Map в JSON
+        .body(body) //Spring сам конвертує Map в JSON
         .retrieve()
         .body(String.class);
+    System.out.println(response);
     return true;
   }
 

@@ -26,8 +26,8 @@ public class BillsService {
     return billsRepository.findByChatId(chatId).orElseThrow(() -> new EntityNotFoundException("Bill not found"));
   }
 
-  public Bill findByMonthAndYear(int month, int year) {
-    return billsRepository.findByMonthAndYear(month, year).orElseThrow(() -> new EntityNotFoundException("Bill not found"));
+  public Bill findByMonthAndYearAndChatId(int month, int year, long chatId) {
+    return billsRepository.findByMonthAndYearAndChatId(month, year, chatId).orElseThrow(() -> new EntityNotFoundException("Bill not found"));
   }
 
   public void save(Bill bill) {
@@ -40,8 +40,8 @@ public class BillsService {
 
   public String calculateTotalCost(long chatId) {
     double totalCost = 0;
-    Bill currentBill = billsRepository.findByMonthAndYear(
-        LocalDate.now().getMonthValue(), LocalDate.now().getYear()).orElseThrow(() -> new EntityNotFoundException("Bill not found"));
+    Bill currentBill = billsRepository.findByMonthAndYearAndChatId(
+        LocalDate.now().getMonthValue(), LocalDate.now().getYear(), chatId).orElseThrow(() -> new EntityNotFoundException("Bill not found"));
     Rate currentRate = ratesRepository.findByChatId(chatId).orElseThrow(() -> new EntityNotFoundException("Rate not found"));
     currentBill.setElectricityCost(currentBill.getElectricity() * currentRate.getElectricityRate());
     currentBill.setColdWaterCost(currentBill.getColdWater() * currentRate.getColdWaterRate());

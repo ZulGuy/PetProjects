@@ -1,5 +1,7 @@
 package com.studying.itsditbot;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.studying.itsditbot.dto.CommentBody;
 import com.studying.itsditbot.dto.Issue;
 import com.studying.itsditbot.dto.JiraResponse;
@@ -12,6 +14,8 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpClientErrorException.Forbidden;
 import org.springframework.web.client.HttpClientErrorException.Unauthorized;
 import org.springframework.web.client.RestClient;
@@ -36,7 +40,7 @@ public class JiraApi {
   }
 
   public JiraResponse getIssues() {
-    String jql = "project = ITSD AND status in (Open, \"In Progress\", Reopened, \"Waiting for support\", Pending, Escalated, \"Waiting for approval\", \"Work in progress\", \"Awaiting CAB approval\", Planning, Implementing, \"Under investigation\", \"Under review\", Assigned, \"Assigned to group\", \"Ожидание выполнения\", \"In Progress contractor\", \"Transferred to contractor\", \"Awaiting fin CAB\", \"Cmdb owner approval\") AND assignee in (currentUser()) ORDER BY created DESC, \"Time to resolution\" ASC";
+    String jql = "project = ITSD AND issuetype = \"Service Request\" AND status in (Open, \"In Progress\", Reopened, \"Waiting for support\", Pending, Escalated, \"Waiting for approval\", \"Work in progress\", \"Awaiting CAB approval\", Planning, Implementing, \"Under investigation\", \"Under review\", Assigned, \"Assigned to group\", \"Ожидание выполнения\", \"In Progress contractor\", \"Transferred to contractor\", \"Awaiting fin CAB\", \"Cmdb owner approval\") AND assignee in (currentUser()) ORDER BY created DESC, \"Time to resolution\" ASC";
     var uri = UriComponentsBuilder
         .fromUri(URI.create(URL + "search/"))
         .queryParam("jql", jql)
@@ -99,14 +103,55 @@ public class JiraApi {
         )
     );
 
-    String response = restClient.post()
-        .uri("issue/" + currentIssue.key() + "/transitions")
-        .contentType(MediaType.APPLICATION_JSON)
-        .body(body) //Spring сам конвертує Map в JSON
+    String message = null;
+
+    try{
+      String response = restClient.post()
+          .uri("issue/" + currentIssue.key() + "/transitions")
+          .contentType(MediaType.APPLICATION_JSON)
+          .body(body) //Spring сам конвертує Map в JSON
+          .retrieve()
+          .body(String.class);
+      System.out.println(response);
+      return response;
+    } catch (HttpClientErrorException.BadRequest e) {
+      try {
+        message = new ObjectMapper()
+            .readTree(e.getResponseBodyAsString())
+            .get("errorMessages")
+            .get(0)
+            .asText();
+      } catch (JsonProcessingException ex) {
+        throw new RuntimeException(ex);
+      }
+    }
+
+    if(message != null && message.contains("Поле \"ІТ сервіс\" обов'язкове для заповенння!")) {
+      return message;
+    }
+    return null;
+  }
+
+  public boolean setItService(String itService, String issueKey) {
+    Map<String, Object> fieldValue = Map.of("id", itService);
+
+    Map<String, Object> fields = Map.of(
+        "customfield_18803", fieldValue
+    );
+
+    Map<String, Object> body = Map.of(
+        "fields", fields
+    );
+
+    ResponseEntity<Void> response = restClient.put()
+        .uri("issue/" + issueKey)
+        .body(body)
         .retrieve()
-        .body(String.class);
-    System.out.println(response);
-    return true;
+        .toBodilessEntity();
+    if (response.getStatusCode().is2xxSuccessful()) {
+      return true;
+    }
+    return false;
   }
 
   public boolean isAuth() {
@@ -154,7 +199,7 @@ public class JiraApi {
   }
 
   public Issue[] getIssuesScheduled() {
-    String jql = "project = ITSD AND status in (Open, \"In Progress\", Reopened, \"Waiting for support\", Pending, Escalated, \"Waiting for approval\", \"Work in progress\", \"Awaiting CAB approval\", Planning, Implementing, \"Under investigation\", \"Under review\", Assigned, \"Assigned to group\", \"Ожидание выполнения\", \"In Progress contractor\", \"Transferred to contractor\", \"Awaiting fin CAB\", \"Cmdb owner approval\") AND assignee in (currentUser()) ORDER BY created DESC, \"Time to resolution\" ASC";
+    String jql = "project = ITSD AND issuetype = \"Service Request\" AND status in (Open, \"In Progress\", Reopened, \"Waiting for support\", Pending, Escalated, \"Waiting for approval\", \"Work in progress\", \"Awaiting CAB approval\", Planning, Implementing, \"Under investigation\", \"Under review\", Assigned, \"Assigned to group\", \"Ожидание выполнения\", \"In Progress contractor\", \"Transferred to contractor\", \"Awaiting fin CAB\", \"Cmdb owner approval\") AND assignee in (currentUser()) ORDER BY created DESC, \"Time to resolution\" ASC";
     var uri = UriComponentsBuilder
         .fromUri(URI.create(URL + "search/"))
         .queryParam("jql", jql)

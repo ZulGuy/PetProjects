@@ -36,21 +36,46 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
   private final String BOT_TOKEN;
   private Map<Long, String> currentIssueHashMap = new ConcurrentHashMap<>();
 
-  private static final String[] IT_SERVICE = {
-      "1C HR", "1C IFRS", "1С Агро",
-      "1С ДВА", "1С ККУ", "1С РТК",
-      "1С УК", "AI. Підтримка", "APS Tender",
-      "ARCGIS", "BAS Документообіг", "DAB",
-      "EDocs", "HR сервіси", "LandInvest",
-      "M.E.Doc", "MS Office 365", "Navision",
-      "RDS сервіси", "WEB-сайти", "WIALON",
-      "АСУБЗ", "Друкуюча техніка", "Звітність Пенсійного Фонду",
-      "Інформаційна безпека", "Клієнт-Банк", "КНО",
-      "Корпоративна звітність", "Корпоративна мережа", "Корпоративна пошта",
-      "Корпоративна телефонія", "Логістичні сервіси", "Підтримка ІТ Інфраструктури",
-      "Підтримка користувачів", "Робоче місце", "Сервіси ДВА",
-      "Система подачі бух. звітності та ЕСВ", "Інше"
-  };
+  private static final Map<String, String> IT_SERVICE = Map.ofEntries(
+      Map.entry("1C HR", "22716"),
+      Map.entry("1C IFRS", "22717"),
+      Map.entry("1С Агро", "22718"),
+      Map.entry("1С ДВА", "18905"),
+      Map.entry("1С ККУ", "22719"),
+      Map.entry("1С РТК", "22720"),
+      Map.entry("1С УК", "22721"),
+      Map.entry("AI. Підтримка", "23808"),
+      Map.entry("APS Tender", "22722"),
+      Map.entry("ARCGIS", "22723"),
+      Map.entry("BAS Документообіг", "22724"),
+      Map.entry("DAB", "22725"),
+      Map.entry("EDocs", "18906"),
+      Map.entry("HR сервіси", "23810"),
+      Map.entry("LandInvest", "22726"),
+      Map.entry("M.E.Doc", "22727"),
+      Map.entry("MS Office 365", "21700"),
+      Map.entry("Navision", "22728"),
+      Map.entry("RDS сервіси", "22729"),
+      Map.entry("WEB-сайти", "22730"),
+      Map.entry("WIALON", "22731"),
+      Map.entry("АСУБЗ", "22732"),
+      Map.entry("Друкуюча техніка", "21701"),
+      Map.entry("Звітність Пенсійного Фонду", "22733"),
+      Map.entry("Інформаційна безпека", "22734"),
+      Map.entry("Клієнт-Банк", "22735"),
+      Map.entry("КНО", "22736"),
+      Map.entry("Корпоративна звітність", "22737"),
+      Map.entry("Корпоративна мережа", "18811"),
+      Map.entry("Корпоративна пошта", "22738"),
+      Map.entry("Корпоративна телефонія", "22739"),
+      Map.entry("Логістичні сервіси", "22740"),
+      Map.entry("Підтримка ІТ Інфраструктури", "18908"),
+      Map.entry("Підтримка користувачів", "18907"),
+      Map.entry("Робоче місце", "22741"),
+      Map.entry("Сервіси ДВА", "22742"),
+      Map.entry("Система подачі бух. звітності та ЕСВ", "22743"),
+      Map.entry("Інше", "23700")
+  );
 
   public ITSDBot(@Value("${telegram.bot.token}") String botToken) {
     BOT_TOKEN = botToken;
@@ -74,7 +99,12 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
 
       String messageText = update.getMessage().getText();
       long chatId = update.getMessage().getChatId();
-      SendMessage message = null;
+      SendMessage message = SendMessage
+          .builder()
+          .chatId(chatId)
+          .text("Будь ласка, користуйтесь кнопками на клавіатурі бота та\\або командами з меню!")
+          .replyMarkup(setKeyboard())
+          .build();
 
       if (messageText.equals("/start")) {
 
@@ -244,8 +274,8 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
             break;
           }
         }
-        String isResolved = apiHashMap.get(chatId).resolveIssue(currentIssue, messageText);
-        if (isResolved) {
+        String response = apiHashMap.get(chatId).resolveIssue(currentIssue, messageText);
+        if (response == null) {
 
           message = SendMessage
               .builder()
@@ -254,18 +284,53 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
               .replyMarkup(setKeyboard())
               .build();
 
-        } else {
+        } else if (response.equals("Поле \"ІТ сервіс\" обов'язкове для заповенння!")) {
 
+          message = SendMessage
+              .builder()
+              .chatId(chatId)
+              .text("Виникла помилка при вирішенні запиту " + currentIssueHashMap.get(chatId) + "\n"
+              + response)
+              .replyMarkup(setKeyboard())
+              .build();
+
+        } else {
           message = SendMessage
               .builder()
               .chatId(chatId)
               .text("Виникла помилка при вирішенні запиту " + currentIssueHashMap.get(chatId))
               .replyMarkup(setKeyboard())
               .build();
-
         }
 
         resolutionStatusHashMap.replace(chatId, ResolutionStatus.NONE);
+
+      } else if(currentIssueHashMap.containsKey(chatId) && messageText.equals("Заповнити ІТ сервіс")) {
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, оберіть ІТ сервіс з запропонованих")
+            .replyMarkup(itServiceKeyboard())
+            .build();
+
+      } else if(IT_SERVICE.containsKey(messageText) && currentIssueHashMap.containsKey(chatId)) {
+        boolean isChanged = apiHashMap.get(chatId).setItService(IT_SERVICE.get(messageText), currentIssueHashMap.get(chatId));
+
+        if(isChanged) {
+          message = SendMessage
+              .builder()
+              .chatId(chatId)
+              .text("ІТ сервіс встановлено успішно")
+              .replyMarkup(setKeyboard())
+              .build();
+        } else {
+          message = SendMessage
+              .builder()
+              .chatId(chatId)
+              .text("Введено некоректний ІТ сервіс. Повторіть спробу.")
+              .replyMarkup(setKeyboard())
+              .build();
+        }
 
       } else if (authStatusHashMap.get(chatId) == AuthStatus.AUTHORIZED
           && messageText.equals("\uD83D\uDE04 Отримати оновлення")) {
@@ -351,6 +416,9 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
     KeyboardRow row = new KeyboardRow();
     row.add("📋 Мої запити");
     row.add("\uD83D\uDE04 Отримати оновлення");
+    keyboardRows.add(row);
+    row = new KeyboardRow();
+    row.add("Заповнити ІТ сервіс");
     row.add("✅ Вирішити запит");
     keyboardRows.add(row);
     ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(keyboardRows);
@@ -372,12 +440,10 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
 
   public static ReplyKeyboardMarkup itServiceKeyboard() {
 
-    List<String> services = List.of(IT_SERVICE);
-
     List<KeyboardRow> rows = new ArrayList<>();
     KeyboardRow row = new KeyboardRow();
 
-    for (String service : services) {
+    for (String service : IT_SERVICE.keySet()) {
       if (row.size() == 2) { // по 2 кнопки в ряд
         rows.add(row);
         row = new KeyboardRow();

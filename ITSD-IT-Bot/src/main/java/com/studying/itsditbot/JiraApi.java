@@ -183,12 +183,8 @@ public class JiraApi {
   public void addComment(String issueKey, String commentBody) {
     String url = "issue/" + issueKey + "/comment";
 
-    Map<String, Object> internalValue = Map.of("internal", true);
-    Map<String, Object> property = Map.of("key", "sd.public.comment", "value", internalValue);
-
     Map<String, Object> body = Map.of(
-        "body", commentBody,
-        "properties", List.of(property)
+        "body", commentBody
     );
 
     restClient.post()

@@ -3,6 +3,7 @@ package com.studying.itsditbot;
 import com.studying.itsditbot.dto.Issue;
 import com.studying.itsditbot.dto.JiraResponse;
 import com.studying.itsditbot.enums.AuthStatus;
+import com.studying.itsditbot.enums.CommentStatus;
 import com.studying.itsditbot.enums.ResolutionStatus;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
   private Map<Long, ResolutionStatus> resolutionStatusHashMap = new ConcurrentHashMap<>();
   private final String BOT_TOKEN;
   private Map<Long, String> currentIssueHashMap = new ConcurrentHashMap<>();
+  private Map<Long, CommentStatus> commentStatusHashMap = new ConcurrentHashMap<>();
 
   private static final Map<String, String> IT_SERVICE = Map.ofEntries(
       Map.entry("1C HR", "22716"),
@@ -327,11 +329,28 @@ public class ITSDBot implements SpringLongPollingBot, LongPollingSingleThreadUpd
           message = SendMessage
               .builder()
               .chatId(chatId)
-              .text("Введено некоректний ІТ сервіс. Повторіть спробу.")
+              .text("Введено некоректний ІТ сервіс. Повторіть спробу")
               .replyMarkup(setKeyboard())
               .build();
         }
 
+      } else if(messageText.equals("Написати коментар") && currentIssueHashMap.containsKey(chatId)) {
+        commentStatusHashMap.put(chatId, CommentStatus.WAITING_COMMENT);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть коментар")
+            .replyMarkup(setKeyboard())
+            .build();
+      } else if(currentIssueHashMap.containsKey(chatId)
+          && commentStatusHashMap.get(chatId) == CommentStatus.WAITING_COMMENT) {
+        apiHashMap.get(chatId).addComment(messageText, currentIssueHashMap.get(chatId));
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Коментар додано до запиту")
+            .replyMarkup(setKeyboard())
+            .build();
       } else if (authStatusHashMap.get(chatId) == AuthStatus.AUTHORIZED
           && messageText.equals("\uD83D\uDE04 Отримати оновлення")) {
         String issuesText = sendUpdates(apiHashMap.get(chatId), chatId, message);

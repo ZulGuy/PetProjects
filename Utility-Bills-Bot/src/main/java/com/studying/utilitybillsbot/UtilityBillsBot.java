@@ -4,10 +4,8 @@ import jakarta.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -127,7 +125,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
         message = SendMessage
             .builder()
             .chatId(chatId)
-            .replyMarkup(setStandardKeyboard())
+            .replyMarkup(setUtilitiesKeyboard())
             .text("Будь ласка, впишіть показник електроенергії на початку місяця")
             .build();
 
@@ -139,7 +137,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
           message = SendMessage
               .builder()
               .chatId(chatId)
-              .replyMarkup(setStandardKeyboard())
+              .replyMarkup(setUtilitiesKeyboard())
               .text("Будь ласка, впишіть показник електроенергії на початку місяця")
               .build();
           try {
@@ -156,7 +154,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
         message = SendMessage
             .builder()
             .chatId(chatId)
-            .replyMarkup(setStandardKeyboard())
+            .replyMarkup(setUtilitiesKeyboard())
             .text("Будь ласка, впишіть показник холодної води на початку місяця")
             .build();
 
@@ -168,7 +166,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
           message = SendMessage
               .builder()
               .chatId(chatId)
-              .replyMarkup(setStandardKeyboard())
+              .replyMarkup(setUtilitiesKeyboard())
               .text("Будь ласка, впишіть показник холодної води на початку місяця")
               .build();
           try {
@@ -185,7 +183,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
         message = SendMessage
             .builder()
             .chatId(chatId)
-            .replyMarkup(setStandardKeyboard())
+            .replyMarkup(setUtilitiesKeyboard())
             .text("Будь ласка, впишіть показник гарячої води на початку місяця")
             .build();
 
@@ -197,7 +195,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
           message = SendMessage
               .builder()
               .chatId(chatId)
-              .replyMarkup(setStandardKeyboard())
+              .replyMarkup(setUtilitiesKeyboard())
               .text("Будь ласка, впишіть показник гарячої води на початку місяця")
               .build();
           try {
@@ -214,7 +212,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
         message = SendMessage
             .builder()
             .chatId(chatId)
-            .replyMarkup(setStandardKeyboard())
+            .replyMarkup(setUtilitiesKeyboard())
             .text("Будь ласка, впишіть показник газу на початку місяця")
             .build();
 
@@ -226,7 +224,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
           message = SendMessage
               .builder()
               .chatId(chatId)
-              .replyMarkup(setStandardKeyboard())
+              .replyMarkup(setUtilitiesKeyboard())
               .text("Будь ласка, впишіть показник газу на початку місяця")
               .build();
           try {
@@ -270,7 +268,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
         message = SendMessage
             .builder()
             .chatId(chatId)
-            .replyMarkup(setStandardKeyboard())
+            .replyMarkup(setUtilitiesKeyboard())
             .text("Будь ласка, внесіть показники елетроенергії в кінці місяця")
             .build();
 
@@ -284,7 +282,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
           message = SendMessage
               .builder()
               .chatId(chatId)
-              .replyMarkup(setStandardKeyboard())
+              .replyMarkup(setUtilitiesKeyboard())
               .text("Будь ласка, внесіть показники елетроенергії в кінці місяця")
               .build();
           try {
@@ -301,7 +299,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
         message = SendMessage
             .builder()
             .chatId(chatId)
-            .replyMarkup(setStandardKeyboard())
+            .replyMarkup(setUtilitiesKeyboard())
             .text("Будь ласка, внесіть показники холодної води в кінці місяця")
             .build();
 
@@ -314,7 +312,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
           message = SendMessage
               .builder()
               .chatId(chatId)
-              .replyMarkup(setStandardKeyboard())
+              .replyMarkup(setUtilitiesKeyboard())
               .text("Будь ласка, внесіть показники холодної води в кінці місяця")
               .build();
           try {
@@ -331,7 +329,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
         message = SendMessage
             .builder()
             .chatId(chatId)
-            .replyMarkup(setStandardKeyboard())
+            .replyMarkup(setUtilitiesKeyboard())
             .text("Будь ласка, внесіть показники гарячої води в кінці місяця")
             .build();
 
@@ -344,7 +342,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
           message = SendMessage
               .builder()
               .chatId(chatId)
-              .replyMarkup(setStandardKeyboard())
+              .replyMarkup(setUtilitiesKeyboard())
               .text("Будь ласка, внесіть показники гарячої води в кінці місяця")
               .build();
           try {
@@ -361,7 +359,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
         message = SendMessage
             .builder()
             .chatId(chatId)
-            .replyMarkup(setStandardKeyboard())
+            .replyMarkup(setUtilitiesKeyboard())
             .text("Будь ласка, внесіть показники газу в кінці місяця")
             .build();
 
@@ -374,7 +372,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
           message = SendMessage
               .builder()
               .chatId(chatId)
-              .replyMarkup(setStandardKeyboard())
+              .replyMarkup(setUtilitiesKeyboard())
               .text("Будь ласка, внесіть показники газу в кінці місяця")
               .build();
           try {
@@ -566,6 +564,12 @@ public class UtilityBillsBot implements SpringLongPollingBot,
               .text("Будь ласка, введіть число у форматі 1234.56")
               .build();
         }
+      } else if (messageText.equals("Редагувати показники")) {
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, оберіть потрібний показник")
+            .build();
       }
       try {
         telegramClient.executeAsync(message);
@@ -606,6 +610,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
     row = new KeyboardRow();
     row.add("Редагувати показники");
     row.add("Статистика");
+    row.add("Розрахунок");
     keyboardRows.add(row);
     ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(keyboardRows);
     keyboardMarkup.setResizeKeyboard(true);
@@ -625,10 +630,28 @@ public class UtilityBillsBot implements SpringLongPollingBot,
     return keyboardMarkup;
   }
 
-  private static ReplyKeyboardMarkup setStandardKeyboard() {
+  private static ReplyKeyboardMarkup setUtilitiesKeyboard() {
     List<KeyboardRow> keyboardRows = new ArrayList<>();
     KeyboardRow row = new KeyboardRow();
-    row.add("Редагувати показники");
+    row.add("Електроенергія");
+    row.add("Холодна вода");
+    row.add("Гаряча вода");
+    row.add("Газ");
+    row.add("Тарифи");
+    keyboardRows.add(row);
+    ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(keyboardRows);
+    keyboardMarkup.setResizeKeyboard(true);
+    return keyboardMarkup;
+  }
+
+  private static ReplyKeyboardMarkup setRatesKeyboard() {
+    List<KeyboardRow> keyboardRows = new ArrayList<>();
+    KeyboardRow row = new KeyboardRow();
+    row.add("Електроенергія");
+    row.add("Холодна вода");
+    row.add("Гаряча вода");
+    row.add("Газ");
+    row.add("Тарифи");
     keyboardRows.add(row);
     ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup(keyboardRows);
     keyboardMarkup.setResizeKeyboard(true);

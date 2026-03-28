@@ -570,7 +570,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
             .chatId(chatId)
             .text("Будь ласка, оберіть потрібний показник")
             .build();
-      }
+      } else if(messageText.equals(""))
       try {
         telegramClient.executeAsync(message);
       } catch (TelegramApiException e) {

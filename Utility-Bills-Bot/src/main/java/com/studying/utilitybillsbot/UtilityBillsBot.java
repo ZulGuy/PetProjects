@@ -39,6 +39,10 @@ public class UtilityBillsBot implements SpringLongPollingBot,
   Map<Long, Bill> previousBills = new HashMap<>();
   Map<Long, Rate> previousRates = new HashMap<>();
 
+  private BillsStatus previousBillsStatus = BillsStatus.NONE;
+  private RatesStatus previousRatesStatus = RatesStatus.NONE;
+  private Status previousStatus = Status.NONE;
+
   @Autowired
   public UtilityBillsBot(@Value("${telegram.bot.token}") String botToken, UsersService usersService,
       BillsService billsService,
@@ -98,7 +102,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
           .builder()
           .chatId(chatId)
           .replyMarkup(setKeyboard())
-          .text("Виникла помилка!!!")
+          .text("Будь ласка, використовуйте кнопки з клавіатури бота!")
           .build();
 
       if (messageText.equals("/start")) {
@@ -113,6 +117,25 @@ public class UtilityBillsBot implements SpringLongPollingBot,
             .replyMarkup(setKeyboard())
             .text("Будь ласка, натисніть 'Внести показники на початку місяця'")
             .build();
+
+      } else if (messageText.equals("Розрахувати показники")) {
+        if (ratesService.findByChatId(chatId) != null
+            && ratesService.findByChatId(chatId).getGasRate() != 0) {
+          billsService.calculateTotalCost(chatId);
+          currentBill = billsService.findByMonthAndYearAndChatId(LocalDate.now().getMonthValue(), LocalDate.now().getYear(), chatId);
+
+          message = SendMessage
+              .builder()
+              .chatId(chatId)
+              .replyMarkup(setKeyboard())
+              .text("Рахунок за комунальні послуги за " + LocalDate.now() + ":" + "\n"
+                  + "Електроенергія: " + currentBill.getElectricityCost() + "грн" + "\n"
+                  + "Холодна вода: " + currentBill.getColdWaterCost() + "грн" + "\n"
+                  + "Гаряча вода: " + currentBill.getHotWaterCost() + "грн" + "\n"
+                  + "Газ: " + currentBill.getGasCost() + "грн" + "\n"
+                  + "Загальна сума: " + currentBill.getTotalCost() + "грн")
+              .build();
+        }
 
       } else if (messageText.equals("Внести показники на початку місяця")
           && currentUser.getStatus() == Status.NONE) {
@@ -247,7 +270,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
             .build();
 
       } else if ((!messageText.equals("Внести показники в кінці місяця"))
-          && currentUser.getStatus() == Status.COMPLETED_FIRST_DAY_OF_MONTH){
+          && currentUser.getStatus() == Status.COMPLETED_FIRST_DAY_OF_MONTH) {
         message = SendMessage
             .builder()
             .chatId(chatId)
@@ -305,8 +328,9 @@ public class UtilityBillsBot implements SpringLongPollingBot,
 
       } else if (currentUser.getStatus() == Status.WAITING_LAST_DAY_OF_MONTH
           && currentUser.getBillsStatus() == BillsStatus.WAITING_COLD_WATER) {
-        try{
-          currentBill.setColdWater(Integer.parseInt(messageText.trim()) - currentBill.getColdWater());
+        try {
+          currentBill.setColdWater(
+              Integer.parseInt(messageText.trim()) - currentBill.getColdWater());
         } catch (Exception e) {
           currentBill.setColdWater(previousBills.get(chatId).getColdWater());
           message = SendMessage
@@ -335,7 +359,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
 
       } else if (currentUser.getStatus() == Status.WAITING_LAST_DAY_OF_MONTH
           && currentUser.getBillsStatus() == BillsStatus.WAITING_HOT_WATER) {
-        try{
+        try {
           currentBill.setHotWater(Integer.parseInt(messageText.trim()) - currentBill.getHotWater());
         } catch (Exception e) {
           currentBill.setHotWater(previousBills.get(chatId).getHotWater());
@@ -365,7 +389,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
 
       } else if (currentUser.getStatus() == Status.WAITING_LAST_DAY_OF_MONTH
           && currentUser.getBillsStatus() == BillsStatus.WAITING_GAS) {
-        try{
+        try {
           currentBill.setGas(Integer.parseInt(messageText.trim()) - currentBill.getGas());
         } catch (Exception e) {
           currentBill.setGas(previousBills.get(chatId).getGas());
@@ -395,16 +419,17 @@ public class UtilityBillsBot implements SpringLongPollingBot,
                 "Чи змінились тарифи на комуналку? (Оберіть на клавіатурі бота 'Так', 'Ні' або 'Ввести тарифи вперше')")
             .build();
 
-      } else if(currentUser.getStatus() == Status.COMPLETED_LAST_DAY_OF_MONTH
-          && messageText.equals("Ні")) {
-        if (ratesService.findByChatId(chatId) != null && ratesService.findByChatId(chatId).getGasRate() != 0) {
+      } else if (messageText.equals("Ні")) {
+        if (ratesService.findByChatId(chatId) != null
+            && ratesService.findByChatId(chatId).getGasRate() != 0) {
           try {
             currentRate.setGasRate(Double.parseDouble(messageText.trim()));
             currentUser.setRatesStatus(RatesStatus.COMPLETED);
             ratesService.save(currentRate);
             usersService.save(currentUser);
             billsService.calculateTotalCost(chatId);
-            currentBill = billsService.findByMonthAndYearAndChatId(LocalDate.now().getMonthValue(), LocalDate.now().getYear(), chatId);
+            currentBill = billsService.findByMonthAndYearAndChatId(LocalDate.now().getMonthValue(),
+                LocalDate.now().getYear(), chatId);
             ratesService.save(currentRate);
             usersService.save(currentUser);
 
@@ -535,7 +560,8 @@ public class UtilityBillsBot implements SpringLongPollingBot,
           ratesService.save(currentRate);
           usersService.save(currentUser);
           billsService.calculateTotalCost(chatId);
-          currentBill = billsService.findByMonthAndYearAndChatId(LocalDate.now().getMonthValue(), LocalDate.now().getYear(), chatId);
+          currentBill = billsService.findByMonthAndYearAndChatId(LocalDate.now().getMonthValue(),
+              LocalDate.now().getYear(), chatId);
           ratesService.save(currentRate);
           usersService.save(currentUser);
 
@@ -551,8 +577,8 @@ public class UtilityBillsBot implements SpringLongPollingBot,
                   + "Загальна сума: " + currentBill.getTotalCost() + "грн")
               .build();
 
-          currentUser.setStatus(Status.WAITING_FIRST_DAY_OF_MONTH);
-          currentUser.setBillsStatus(BillsStatus.WAITING_ELECTRICITY);
+          currentUser.setStatus(Status.NONE);
+          currentUser.setBillsStatus(BillsStatus.NONE);
           currentUser.setRatesStatus(RatesStatus.NONE);
           usersService.save(currentUser);
 
@@ -565,12 +591,182 @@ public class UtilityBillsBot implements SpringLongPollingBot,
               .build();
         }
       } else if (messageText.equals("Редагувати показники")) {
+        previousStatus = currentUser.getStatus();
+        previousBillsStatus = currentUser.getBillsStatus();
+        previousRatesStatus = currentUser.getRatesStatus();
+        currentUser.setBillsStatus(BillsStatus.EDITING);
+        currentUser.setRatesStatus(RatesStatus.EDITING);
+        currentUser.setStatus(Status.NONE);
+        usersService.save(currentUser);
         message = SendMessage
             .builder()
             .chatId(chatId)
             .text("Будь ласка, оберіть потрібний показник")
+            .replyMarkup(setUtilitiesKeyboard())
             .build();
-      } else if(messageText.equals(""))
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING
+          && messageText.equals("Електроенергія")) {
+        currentUser.setBillsStatus(BillsStatus.EDITING_ELECTRICITY_FIRST);
+        usersService.save(currentUser);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть показники електроенергії на початку місяця")
+            .build();
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING_ELECTRICITY_FIRST) {
+        currentBill.setElectricity(Integer.parseInt(messageText));
+        billsService.save(currentBill);
+        currentUser.setBillsStatus(BillsStatus.EDITING_ELECTRICITY_LAST);
+        usersService.save(currentUser);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть показники електроенергії в кінці місяця")
+            .build();
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING_ELECTRICITY_LAST) {
+        currentBill.setElectricity(Integer.parseInt(messageText) - currentBill.getElectricity());
+        currentBill.setElectricityCost(currentBill.getElectricity() * currentRate.getElectricityRate());
+        billsService.save(currentBill);
+        currentUser.setBillsStatus(previousBillsStatus);
+        currentUser.setStatus(previousStatus);
+        currentUser.setRatesStatus(previousRatesStatus);
+        usersService.save(currentUser);
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING
+          && messageText.equals("Холодна вода")) {
+        currentUser.setBillsStatus(BillsStatus.EDITING_COLD_WATER_FIRST);
+        usersService.save(currentUser);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть показники холодної води на початку місяця")
+            .build();
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING_COLD_WATER_FIRST) {
+        currentBill.setColdWater(Integer.parseInt(messageText));
+        billsService.save(currentBill);
+        currentUser.setBillsStatus(BillsStatus.EDITING_COLD_WATER_LAST);
+        usersService.save(currentUser);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть показники холодної води в кінці місяця")
+            .build();
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING_COLD_WATER_LAST) {
+        currentBill.setColdWater(Integer.parseInt(messageText) - currentBill.getColdWater());
+        currentBill.setColdWaterCost(currentBill.getColdWater() * currentRate.getColdWaterRate());
+        billsService.save(currentBill);
+        currentUser.setBillsStatus(previousBillsStatus);
+        currentUser.setStatus(previousStatus);
+        currentUser.setRatesStatus(previousRatesStatus);
+        usersService.save(currentUser);
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING
+          && messageText.equals("Гаряча вода")) {
+        currentUser.setBillsStatus(BillsStatus.EDITING_HOT_WATER_FIRST);
+        usersService.save(currentUser);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть показники гарячої води на початку місяця")
+            .build();
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING_HOT_WATER_FIRST) {
+        currentBill.setHotWater(Integer.parseInt(messageText));
+        billsService.save(currentBill);
+        currentUser.setBillsStatus(BillsStatus.EDITING_HOT_WATER_LAST);
+        usersService.save(currentUser);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть показники гарячої води в кінці місяця")
+            .build();
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING_HOT_WATER_LAST) {
+        currentBill.setHotWater(Integer.parseInt(messageText) - currentBill.getHotWater());
+        currentBill.setHotWaterCost(currentBill.getHotWater() * currentRate.getHotWaterRate());
+        billsService.save(currentBill);
+        currentUser.setBillsStatus(previousBillsStatus);
+        currentUser.setStatus(previousStatus);
+        currentUser.setRatesStatus(previousRatesStatus);
+        usersService.save(currentUser);
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING
+          && messageText.equals("Газ")) {
+        currentUser.setBillsStatus(BillsStatus.EDITING_GAS_FIRST);
+        usersService.save(currentUser);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть показники газу на початку місяця")
+            .build();
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING_GAS_FIRST) {
+        currentBill.setGas(Integer.parseInt(messageText));
+        billsService.save(currentBill);
+        currentUser.setBillsStatus(BillsStatus.EDITING_GAS_LAST);
+        usersService.save(currentUser);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть показники газу в кінці місяця")
+            .build();
+      } else if (currentUser.getBillsStatus() == BillsStatus.EDITING_GAS_LAST) {
+        currentBill.setGas(Integer.parseInt(messageText) - currentBill.getGas());
+        currentBill.setGasCost(currentBill.getGas() * currentRate.getGasRate());
+        billsService.save(currentBill);
+        currentUser.setBillsStatus(previousBillsStatus);
+        currentUser.setStatus(previousStatus);
+        currentUser.setRatesStatus(previousRatesStatus);
+        usersService.save(currentUser);
+      } else if (currentUser.getRatesStatus() == RatesStatus.EDITING
+          && messageText.equals("Тарифи")) {
+        currentUser.setRatesStatus(RatesStatus.EDITING_ELECTRICITY_RATE);
+        usersService.save(currentUser);
+        currentBill.setElectricityCost(currentBill.getElectricity() * currentRate.getElectricityRate());
+        billsService.save(currentBill);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть тариф на електроенергію")
+            .build();
+      } else if (currentUser.getRatesStatus() == RatesStatus.EDITING_ELECTRICITY_RATE) {
+        currentRate.setElectricityRate(Double.parseDouble(messageText));
+        ratesService.save(currentRate);
+        currentUser.setRatesStatus(RatesStatus.EDITING_COLD_WATER_RATE);
+        usersService.save(currentUser);
+        currentBill.setColdWaterCost(currentBill.getColdWater() * currentRate.getColdWaterRate());
+        billsService.save(currentBill);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть тариф на холодну воду")
+            .build();
+      } else if (currentUser.getRatesStatus() == RatesStatus.EDITING_COLD_WATER_RATE) {
+        currentRate.setColdWaterRate(Double.parseDouble(messageText));
+        ratesService.save(currentRate);
+        currentUser.setRatesStatus(RatesStatus.EDITING_HOT_WATER_RATE);
+        usersService.save(currentUser);
+        currentBill.setHotWaterCost(currentBill.getHotWater() * currentRate.getHotWaterRate());
+        billsService.save(currentBill);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть тариф на гарячу воду")
+            .build();
+      } else if (currentUser.getRatesStatus() == RatesStatus.EDITING_HOT_WATER_RATE) {
+        currentRate.setHotWaterRate(Double.parseDouble(messageText));
+        ratesService.save(currentRate);
+        currentUser.setRatesStatus(RatesStatus.EDITING_GAS_RATE);
+        usersService.save(currentUser);
+        currentBill.setGasCost(currentBill.getGas() * currentRate.getGasRate());
+        billsService.save(currentBill);
+        message = SendMessage
+            .builder()
+            .chatId(chatId)
+            .text("Будь ласка, введіть тариф на газ")
+            .build();
+      } else if (currentUser.getRatesStatus() == RatesStatus.EDITING_GAS_RATE) {
+        currentRate.setGasRate(Double.parseDouble(messageText));
+        ratesService.save(currentRate);
+        currentUser.setBillsStatus(previousBillsStatus);
+        currentUser.setStatus(previousStatus);
+        currentUser.setRatesStatus(previousRatesStatus);
+        usersService.save(currentUser);
+      }
       try {
         telegramClient.executeAsync(message);
       } catch (TelegramApiException e) {
@@ -606,6 +802,7 @@ public class UtilityBillsBot implements SpringLongPollingBot,
     KeyboardRow row = new KeyboardRow();
     row.add("Внести показники на початку місяця");
     row.add("Внести показники в кінці місяця");
+    row.add("Розрахувати показники");
     keyboardRows.add(row);
     row = new KeyboardRow();
     row.add("Редагувати показники");

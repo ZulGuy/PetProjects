@@ -1,9 +1,20 @@
+FROM maven:3.9.9-eclipse-temurin-21 AS builder
+
+WORKDIR /app
+
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+COPY src ./src
+
+RUN mvn clean package -DskipTests
+
 FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-COPY target/Utility-Bills-Bot-0.0.1-SNAPSHOT.jar /app/Utility-Bills-Bot-0.0.1-SNAPSHOT.jar
+COPY --from=builder /app/target/*.jar utility-bills-bot.jar
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-Duser.timezone=UTC", "-jar", "/app/Utility-Bills-Bot-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-Duser.timezone=UTC", "-jar", "utility-bills-bot.jar"]

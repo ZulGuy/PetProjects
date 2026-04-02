@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, computed, Input, input} from '@angular/core';
 
 
 @Component({
@@ -11,12 +11,19 @@ import {Component, Input} from '@angular/core';
 export class UserComponent {
   @Input({required: true}) avatar!: string;
   @Input({required: true}) name!: string;
+  // avatar = input.required<string>();
+  // name = input.required<string>();
 
   get imagePath() {
     return `assets/users/` + this.avatar;
   }
 
+  // imagePath = computed(() => {
+  //   return `assets/users/` + this.avatar();
+  // })
+
   onSelectUser() {
+    // this.avatar.set(); не працює для input signal
   }
 
 }

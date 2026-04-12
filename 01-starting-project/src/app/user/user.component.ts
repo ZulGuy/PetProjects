@@ -1,16 +1,11 @@
 import {Component, computed, EventEmitter, Input, input, Output, output} from '@angular/core';
+import {User} from "./user.model";
 
 // type User = { //не тільки object типи
 //   id: string;
 //   name: string;
 //   avatar: string;
 // };
-
-interface User { //лише для object типів
-  id: string;
-  name: string;
-  avatar: string;
-}
 
 @Component({
   selector: 'app-user',

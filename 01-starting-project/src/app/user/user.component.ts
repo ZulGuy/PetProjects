@@ -1,5 +1,5 @@
 import {Component, computed, EventEmitter, Input, input, Output, output} from '@angular/core';
-import {User} from "./user.model";
+import {type User} from "./user.model";
 
 // type User = { //не тільки object типи
 //   id: string;

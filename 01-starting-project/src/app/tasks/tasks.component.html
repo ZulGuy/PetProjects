@@ -2,7 +2,8 @@
   <header>
     <h2>{{name}}' Tasks</h2>
     <menu>
-      <button>Add Task</button>
+      <button (click)="isOpen = true">Add Task</button>
+      <app-add-task [userId]="userId" [task]="newTask" *ngIf="isOpen" (close)="isOpen = false" (taskAdded)="onAddTask($event)"/>
     </menu>
   </header>
 

@@ -1,16 +1,21 @@
 import { Component, Input } from '@angular/core';
 import {TaskComponent} from "./task/task.component";
+import {type Task} from "./task/task.model";
+import {AddTaskComponent} from "./add-task/add-task.component";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [TaskComponent],
+  imports: [TaskComponent, AddTaskComponent, NgIf],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
 export class TasksComponent {
   @Input({required: true}) userId!: string;
   @Input({required: true}) name!: string;
+  newTask: Task = { id: '', userId: '', title: '', summary: '', dueDate: '' };
+  isOpen: boolean = false;
   tasks = [
     {
       id: 't1',
@@ -43,6 +48,16 @@ export class TasksComponent {
 
   onCompleteTask(id: string) {
     this.tasks = this.tasks.filter(task => task.id !== id);
+  }
+
+  onAddTask(task: Task) {
+    console.log('task:', task);
+    console.log('userId:', this.userId);
+    console.log('tasks before:', this.tasks);
+    this.tasks.push(task);
+    console.log('tasks after:', this.tasks);
+    this.newTask = { id: '', userId: '', title: '', summary: '', dueDate: '' };
+    this.isOpen = false;
   }
 
 }

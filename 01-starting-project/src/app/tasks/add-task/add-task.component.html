@@ -1,0 +1,13 @@
+<div class="overlay" (click)="close.emit()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <form #taskForm="ngForm" (ngSubmit)="onAddTask(taskForm)">
+      <input name="title", [(ngModel)]="task.title" required placeholder="Title"/>
+      <input name="summary", [(ngModel)]="task.summary" required placeholder="Summary"/>
+      <input name="dueDate", [(ngModel)]="task.dueDate" required type="date"/>
+      <div class="modal-actions">
+        <button class="btn-cancel" type="button" (click)="close.emit()">Cancel</button>
+        <button class="btn-submit" type="submit" [disabled]="taskForm.invalid">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

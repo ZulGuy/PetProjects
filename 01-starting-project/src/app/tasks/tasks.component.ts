@@ -51,11 +51,7 @@ export class TasksComponent {
   }
 
   onAddTask(task: Task) {
-    console.log('task:', task);
-    console.log('userId:', this.userId);
-    console.log('tasks before:', this.tasks);
     this.tasks.push(task);
-    console.log('tasks after:', this.tasks);
     this.newTask = { id: '', userId: '', title: '', summary: '', dueDate: '' };
     this.isOpen = false;
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {TaskComponent} from "./task/task.component";
 import {type Task} from "./task/task.model";
 import {AddTaskComponent} from "./add-task/add-task.component";
@@ -17,20 +17,11 @@ export class TasksComponent {
   newTask: Task = { id: '', userId: '', title: '', summary: '', dueDate: '' };
   isOpen = false;
   // private tasksService = new TasksService();
-
-  constructor(private tasksService: TasksService) {}
+  // constructor(private tasksService: TasksService) {}
+  private tasksService = inject(TasksService);
 
   get selectedUserTasks() {
     return this.tasksService.getUserTasks(this.userId);
-  }
-
-  onCompleteTask(id: string) {
-    this.tasksService.removeTask(id);
-  }
-
-  onAddTask(task: Task) {
-    this.tasksService.addTask(task);
-    this.isOpen = false;
   }
 
 }

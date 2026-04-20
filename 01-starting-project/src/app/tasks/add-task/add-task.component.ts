@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {type Task} from "../task/task.model";
 import {FormsModule, NgForm} from "@angular/forms";
+import {TasksService} from "../tasks.service";
 
 @Component({
   selector: 'app-add-task',
@@ -14,8 +15,8 @@ import {FormsModule, NgForm} from "@angular/forms";
 export class AddTaskComponent {
   @Input({required: true}) task!: Task;
   @Input({required: true}) userId!: string;
-  @Output() taskAdded = new EventEmitter<Task>();
   @Output() close = new EventEmitter<void>();
+  private tasksService = inject(TasksService);//Класна фіча, треба запам'ятати
 
   onAddTask(form:  NgForm) {
     if(form.invalid) return;
@@ -24,7 +25,8 @@ export class AddTaskComponent {
       id: crypto.randomUUID(),
       userId: this.userId,
     };
-    this.taskAdded.emit(newTask);
+    this.tasksService.addTask(newTask);
+    this.close.emit();
     form.resetForm();
   }
 

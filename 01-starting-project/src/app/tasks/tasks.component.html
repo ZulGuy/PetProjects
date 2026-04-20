@@ -4,7 +4,7 @@
     <menu>
       <button (click)="isOpen = true">Add Task</button>
       @if(isOpen) {
-        <app-add-task [userId]="userId" [task]="newTask" (close)="isOpen = false" (taskAdded)="onAddTask($event)"/>
+        <app-add-task [userId]="userId" [task]="newTask" (close)="isOpen = false"/>
       }
     </menu>
   </header>
@@ -12,7 +12,7 @@
   <ul>
     @for(task of selectedUserTasks; track task.id) {
       <li>
-        <app-task [task] = "task" (complete)="onCompleteTask($event)"/>
+        <app-task [task] = "task"/>
       </li>
     }
   </ul>

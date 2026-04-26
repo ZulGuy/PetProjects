@@ -1,1 +1,25 @@
-<p>user-input works!</p>
+<form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)">
+  <div class="input-group">
+    <p>
+      <label for="initial-investment">Initial Investment</label>
+      <input type="number" id="initial-investment" [(ngModel)]="initialInvestment" name="initialInvestment"/>
+    </p>
+    <p>
+      <label for="annual-investment">Annual Investment</label>
+      <input type="number" id="annual-investment" [(ngModel)]="annualInvestment" name="annualInvestment"/>
+    </p>
+  </div>
+  <div class="input-group">
+    <p>
+      <label for="expected-return">Expected Return</label>
+      <input type="number" id="expected-return" [(ngModel)]="expectedReturn" name="expectedReturn"/>
+    </p>
+    <p>
+      <label for="duration">Duration</label>
+      <input type="number" id="duration" [(ngModel)]="duration" name="duration"/>
+    </p>
+  </div>
+  <p>
+    <button type="submit">Calculate</button>
+  </p>
+</form>

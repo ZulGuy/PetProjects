@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: 000-create-schemas
+      author: volodymyr
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_users
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password_hash
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: processing_logs
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_processing_log
+                    nullable: false
+              - column:
+                  name: input_text
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: output_text
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: processing_logs
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_user_processing_log_user
+            onDelete: CASCADE
+      rollback:
+        - dropTable:
+            tableName: processing_log
+            cascadeConstraints: true
+        - dropTable:
+            tableName: users
+            cascadeConstraints: true
